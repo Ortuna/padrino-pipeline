@@ -10,8 +10,40 @@ describe 'Padrino::Assets' do
     end
   end
 
+  context 'for css assets' do
+    it 'can retrieve an css asset by file name' do
+      get '/assets/stylesheets/application.css'
+      assert_equal 200, last_response.status
+    end
+
+    context 'for custom options' do
+      def app; rack_app; end
+      assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/other')
+      it 'can modify the default asset path by configuration' do
+        mock_app do
+          register Padrino::Assets
+          configure_assets { |assets| assets.append_path assets_location }
+        end
+
+        get '/assets/stylesheets/other.css'
+        assert_equal 200, last_response.status
+      end
+
+      it 'can modify the default css prefix by configuration' do
+        mock_app do
+          register Padrino::Assets
+          configure_assets { |assets| assets.css_prefix = 'myassets' }
+        end
+
+        get '/myassets/application.css'
+        assert_equal 200, last_response.status
+      end
+
+    end
+  end
+
   context 'for javascript assets' do
-    it 'can retrieve an asset by file name' do
+    it 'can retrieve a js asset by file name' do
       get '/assets/javascripts/unrequired.js'
       assert_match 'var unrequired;', last_response.body
     end
@@ -36,13 +68,12 @@ describe 'Padrino::Assets' do
     context 'for custom options' do
       def app; rack_app; end
       assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/javascripts')
+
       it '#append_asset_path' do
         mock_app do
           register Padrino::Assets
-          configure_assets do |assets|
-            assets.append_path assets_location
-          end
-        end#mock-app
+          configure_assets { |assets| assets.append_path assets_location }
+        end
 
         get '/assets/javascripts/app.js'
         assert_match 'var in_second_file', last_response.body
