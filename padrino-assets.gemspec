@@ -1,18 +1,18 @@
 #!/usr/bin/env gem build
 # encoding: utf-8
 
-require File.expand_path("../../padrino-core/lib/padrino-core/version.rb", __FILE__)
+require File.expand_path("../lib/padrino-assets/version.rb", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "padrino-assets"
   s.rubyforge_project = "padrino-assets"
-  s.authors = ["Padrino Team", "Sumeet Singh"]
-  s.email = "padrinorb@gmail.com"
+  s.authors = ["Sumeet Singh"]
+  s.email = "ortuna@gmail.com"
   s.summary = "The Padrino asset management system"
   s.homepage = "http://www.padrinorb.com"
   s.description = "The Padrino asset management system allowing frictionless serving of assets"
   s.required_rubygems_version = ">= 1.3.6"
-  s.version = Padrino.version
+  s.version = Padrino::Assets::VERSION
   s.date = Time.now.strftime("%Y-%m-%d")
 
   s.extra_rdoc_files = Dir["*.rdoc"]
