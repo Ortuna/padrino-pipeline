@@ -10,15 +10,22 @@ module Padrino
 
       private
       def setup_sprockets_stylesheets(app = @app)
-        app.settings.assets.append_path File.join(app.settings.root, 'assets', 'stylesheets')
-        app.settings.assets.css_prefix     = '/assets/stylesheets'
-        app.send(:mount_css_assets, app.settings.assets.css_prefix)
+        setup_sprockets_asset(@app, :extension => 'css', :target => 'stylesheets')
       end
 
-      def setup_sprockets_javascript(app = @app)
-        app.settings.assets.append_path File.join(app.settings.root, 'assets', 'javascripts')
-        app.settings.assets.js_prefix      = '/assets/javascripts'
-        app.send(:mount_js_assets,  app.settings.assets.js_prefix)
+      def setup_sprockets_javascript
+        setup_sprockets_asset(@app, :extension => 'js', :target => 'javascripts')
+      end
+
+      def setup_sprockets_asset(app = @app, options = {})
+        extension = options[:extension]
+        target    = options[:target]
+
+        app.settings.assets.append_path File.join(app.settings.root, 'assets', target)
+        app.settings.assets.send("#{extension}_prefix=", "/assets/#{target}")
+
+        prefix = app.settings.assets.send("#{extension}_prefix")
+        app.send("mount_#{extension}_assets",  prefix)
       end
 
       def setup_sprockets_enviroment(app = @app)
