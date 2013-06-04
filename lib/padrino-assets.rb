@@ -1,3 +1,5 @@
+require 'padrino-assets/setup'
+
 module Padrino
   ##
   # Add public api docs here
@@ -5,31 +7,10 @@ module Padrino
     class << self
       def registered(app)
         require_dependencies
-        #TODO: Extract to class
-        setup_sprockets_enviroment  app
-        setup_sprockets_javascript  app
-        setup_sprockets_stylesheets app
+        Padrino::Assets::Setup.new(app)
       end
 
       alias :included :registered
-      def setup_sprockets_stylesheets(app)
-        app.settings.assets.append_path File.join(app.settings.root, 'assets', 'stylesheets')
-        app.settings.assets.css_prefix     = '/assets/stylesheets'
-        app.send(:mount_css_assets, app.settings.assets.css_prefix)
-      end
-
-      def setup_sprockets_javascript(app)
-        app.settings.assets.append_path File.join(app.settings.root, 'assets', 'javascripts')
-        app.settings.assets.js_prefix      = '/assets/javascripts'
-        app.settings.assets.js_compressor  = Uglifier.new(:mangle => true)
-        app.send(:mount_js_assets,  app.settings.assets.js_prefix)
-      end
-
-      def setup_sprockets_enviroment(app)
-        app.set :serve_assets, true
-        app.set :assets, Sprockets::Environment.new
-      end
-
       def require_dependencies
         require 'sprockets'
         require 'uglifier'
