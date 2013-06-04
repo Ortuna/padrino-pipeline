@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Ortuna/padrino-assets.png?branch=master)](https://travis-ci.org/Ortuna/padrino-assets)
 
 #padrino-assets
 This is an early version and work in progress for sprockets + padrino pipeline
