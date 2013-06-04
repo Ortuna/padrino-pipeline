@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/helper')
 require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app')
 
-describe 'Padrino::Assets' do
+describe Padrino::Assets do
   let(:app) { AssetsApp }
 
   context 'for application behavior' do
