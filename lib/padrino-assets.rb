@@ -35,18 +35,26 @@ module Padrino
 
     private 
     def mount_js_assets(prefix)
-      get "#{prefix}/:file.js" do
-        content_type "application/javascript"
-        settings.assets["#{params[:file]}.js"] || not_found
-      end
+      mount_assets(:prefix => prefix, 
+                   :extension => "js",
+                   :content_type => "application/javascript")
     end
 
     def mount_css_assets(prefix)
-      get "#{prefix}/:file.css" do
-        content_type "text/css"
-        settings.assets["#{params[:file]}.css"] || not_found
-      end
+      mount_assets(:prefix => prefix, 
+                   :extension => "css",
+                   :content_type => "text/css")
     end
 
+    def mount_assets(options = {})
+      prefix       = options[:prefix]
+      extension    = options[:extension]
+      content_type = options[:content_type]
+
+      get "#{prefix}/:file.#{extension}" do
+        content_type(content_type)
+        settings.assets["#{params[:file]}.#{extension}"] || not_found
+      end
+    end
   end
 end
