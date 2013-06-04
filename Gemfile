@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
+gemspec 
 gem "rake"
-gem "padrino", "~> 0.11.0"
-gem "coffee-script", "~> 2.2.0"
-gem "sprockets", "~> 2.2.0"
-gem "uglifier", "~> 2.1.0"
 
 group :test do
   gem "webrat",    ">= 0.5.1"
