@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/helper')
+require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
 require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app')
 
 describe 'Javascripts' do
