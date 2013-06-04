@@ -10,9 +10,6 @@ gem 'padrino-assets', :github => 'Ortuna/padrino-assets'
 ```ruby
 module Ortuna
   class App < Padrino::Application
-    register Padrino::Rendering
-    register Padrino::Mailer
-    register Padrino::Helpers
     register Padrino::Assets
 
     configure_assets do |assets|
