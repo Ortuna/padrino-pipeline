@@ -1,7 +1,6 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/spec'
-require 'mocha/setup'
 
 begin
   require 'ruby-debug'
