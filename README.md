@@ -4,11 +4,27 @@
 #padrino-assets
 This is an early version and work in progress for sprockets + padrino pipeline
 
+#Usage
 include in your padrino project
 ```ruby
 gem 'padrino-assets', :github => 'Ortuna/padrino-assets'
 ```
 
+##Basic usage
+
+```ruby
+module Ortuna
+  class App < Padrino::Application
+    register Padrino::Assets
+
+  end
+end
+```
+
+This should default app/assets/javascripts and app/assets/stylesheets to be served
+from http://localhost:3000/assets/javascripts and http://localhost:3000/assets/styleseets
+
+##Usage with options
 ```ruby
 module Ortuna
   class App < Padrino::Application
@@ -16,9 +32,9 @@ module Ortuna
 
     configure_assets do |assets|
       assets.append_path 'assets/javascripts' # defaults to assets/javascript
-      assets.append_path 'assets/stylesheets' # defaults to assets/javascript
+      assets.append_path 'assets/stylesheets' # defaults to assets/stylesheets
       assets.js_prefix = '/custom/location'   # defaults to /assets/javascripts
-      assets.css_prefix = '/custom/stylesheets'   # defaults to /assets/javascripts
+      assets.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
     end
   end
 end
