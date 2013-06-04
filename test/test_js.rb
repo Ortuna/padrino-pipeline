@@ -11,7 +11,7 @@ describe 'Javascripts' do
 
     it 'is compiled' do 
       get '/assets/javascripts/coffee.js'
-      assert_match '(function(){var a;a="yes"}).call(this);', last_response.body
+      assert_match 'a="yes"', last_response.body
     end
   end
 

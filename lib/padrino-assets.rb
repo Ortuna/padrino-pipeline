@@ -12,7 +12,7 @@ module Padrino
         app.set :assets, Sprockets::Environment.new
         app.settings.assets.append_path File.join(app.settings.root, 'assets', 'javascripts')
         app.settings.assets.append_path File.join(app.settings.root, 'assets', 'stylesheets')
-        app.settings.assets.js_compressor  = Uglifier.new(mangle: true)
+        app.settings.assets.js_compressor  = Uglifier.new(:mangle => true)
         app.settings.assets.js_prefix      = '/assets/javascripts'
         app.settings.assets.css_prefix     = '/assets/stylesheets'
 
