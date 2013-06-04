@@ -4,7 +4,7 @@ module Padrino
       def initialize(app)
         @app = app
         setup_sprockets_enviroment
-        setup_sprockets_javascript
+        setup_sprockets_javascripts
         setup_sprockets_stylesheets
       end
 
@@ -13,7 +13,7 @@ module Padrino
         setup_sprockets_asset(@app, :extension => 'css', :target => 'stylesheets')
       end
 
-      def setup_sprockets_javascript
+      def setup_sprockets_javascripts
         setup_sprockets_asset(@app, :extension => 'js', :target => 'javascripts')
       end
 
