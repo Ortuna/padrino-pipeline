@@ -1,3 +1,12 @@
+PATH
+  remote: .
+  specs:
+    padrino-assets (0.1.0)
+      coffee-script (~> 2.2.0)
+      padrino (~> 0.11.0)
+      sprockets (~> 2.2.0)
+      uglifier (~> 2.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -86,11 +95,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-script (~> 2.2.0)
   minitest (~> 4.0)
-  padrino (~> 0.11.0)
+  padrino-assets!
   rack-test (>= 0.5.0)
   rake
-  sprockets (~> 2.2.0)
-  uglifier (~> 2.1.0)
   webrat (>= 0.5.1)
