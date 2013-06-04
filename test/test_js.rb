@@ -21,6 +21,11 @@ describe 'Javascripts' do
       assert_match 'var unrequired;', last_response.body
     end
 
+    it 'is the right content type' do
+      get '/assets/javascripts/unrequired.js'
+      assert_match 'application/javascript', last_response.content_type
+    end
+
     it 'shows a 404 for unkown assets' do
       get '/assets/javascripts/xyz.js'
       assert_not_equal 200, last_response.status

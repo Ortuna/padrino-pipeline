@@ -9,6 +9,11 @@ describe 'Stylesheets' do
       assert_equal 200, last_response.status
     end
 
+    it 'is the right content type' do
+      get '/assets/stylesheets/application.css'
+      assert_match 'text/css', last_response.content_type
+    end    
+
     context 'for custom options' do
       let(:app) { rack_app }
       before do
