@@ -3,6 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app')
 
 describe 'Javascripts' do
   let(:app) { AssetsApp }
+  context 'for coffeescript assets' do
+    it 'can get a coffeescript' do
+      get '/assets/javascripts/coffee.js'
+      assert_equal 200, last_response.status
+    end
+
+    it 'is compiled' do 
+      get '/assets/javascripts/coffee.js'
+      assert_match '(function(){var a;a="yes"}).call(this);', last_response.body
+    end
+  end
+
   context 'for javascript assets' do
     it 'can retrieve a js asset by file name' do
       get '/assets/javascripts/unrequired.js'
@@ -18,11 +30,6 @@ describe 'Javascripts' do
       it 'picks up require statements' do
         get '/assets/javascripts/app.js'
         assert_match 'var in_second_file;', last_response.body
-      end
-
-      it 'picks up coffee scripts correctly' do 
-        get '/assets/javascripts/app.js'
-        assert_match '(function(){var i;i="yes"}).call(this);', last_response.body
       end
     end
 
