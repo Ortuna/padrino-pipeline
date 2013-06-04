@@ -2,7 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/helper')
 require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app')
 
 describe 'Padrino::Assets' do
-  def app; AssetsApp; end
+  def app
+    AssetsApp
+  end
 
   context 'for application behavior' do
     it 'knows that assets should be served' do
@@ -17,9 +19,13 @@ describe 'Padrino::Assets' do
     end
 
     context 'for custom options' do
-      def app; rack_app; end
-      assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/other')
+      let(:app) { rack_app }
+      before do
+        @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/stylesheets')
+      end
+
       it 'can modify the default asset path by configuration' do
+        assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/other')
         mock_app do
           register Padrino::Assets
           configure_assets { |assets| assets.append_path assets_location }
@@ -30,12 +36,16 @@ describe 'Padrino::Assets' do
       end
 
       it 'can modify the default css prefix by configuration' do
+        assets_location = @assets_location
         mock_app do
           register Padrino::Assets
-          configure_assets { |assets| assets.css_prefix = 'myassets' }
+          configure_assets do |assets|
+            assets.append_path assets_location
+            assets.css_prefix = '/myassets/items'
+          end
         end
 
-        get '/myassets/application.css'
+        get '/myassets/items/application.css'
         assert_equal 200, last_response.status
       end
 
@@ -66,10 +76,13 @@ describe 'Padrino::Assets' do
     end
 
     context 'for custom options' do
-      def app; rack_app; end
-      assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/javascripts')
+      let(:app) { rack_app }
+      before do
+       @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/javascripts')
+      end
 
       it '#append_asset_path' do
+        assets_location = @assets_location
         mock_app do
           register Padrino::Assets
           configure_assets { |assets| assets.append_path assets_location }
@@ -80,6 +93,7 @@ describe 'Padrino::Assets' do
       end
 
       it '#js_prefix mounts assets to the correct spot' do
+        assets_location = @assets_location
         mock_app do
           register Padrino::Assets
           configure_assets do |assets|
@@ -89,6 +103,7 @@ describe 'Padrino::Assets' do
         end#mock-app
         get '/custom/location/app.js'
         assert_match 'var in_second_file', last_response.body
+        assert_equal 200, last_response.status
       end
 
     end#context
