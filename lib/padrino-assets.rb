@@ -23,6 +23,11 @@ module Padrino
       yield assets if block_given?
       after_config  = resolve_prefixes
 
+      update_mount_points before_config, after_config
+    end
+
+    private
+    def update_mount_points(before_config, after_config)
       prefix = assets.prefix || ''
       [:js, :css].each do |asset|
         next if before_config[asset] == after_config[asset] && before_config[:prefix] == after_config[:prefix]
@@ -30,7 +35,6 @@ module Padrino
       end
     end
 
-    private
     def resolve_prefixes
       {}.tap do |prefixes|
         prefixes[:js]     = assets.js_prefix
