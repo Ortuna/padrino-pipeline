@@ -19,24 +19,26 @@ module Padrino
     end #class << self
 
     def configure_assets(&block)
-      original_js_prefix  = assets.js_prefix
-      original_css_prefix = assets.css_prefix
-      original_prefix     = assets.prefix
-
+      before_config = resolve_prefixes
       yield assets if block_given?
-      prefix = assets.prefix || ''
-      unless original_js_prefix  == assets.js_prefix && original_prefix == assets.prefix
-        mount_js_assets(prefix  + assets.js_prefix)
-      end
-      
-      unless original_css_prefix == assets.css_prefix && original_prefix == assets.prefix
-        mount_css_assets(prefix + assets.css_prefix)
-      end
-      
+      after_config  = resolve_prefixes
 
+      prefix = assets.prefix || ''
+      [:js, :css].each do |asset|
+        next if before_config[asset] == after_config[asset] && before_config[:prefix] == after_config[:prefix]
+        send("mount_#{asset.to_s}_assets", prefix + after_config[asset])
+      end
     end
 
     private
+    def resolve_prefixes
+      {}.tap do |prefixes|
+        prefixes[:js]     = assets.js_prefix
+        prefixes[:css]    = assets.css_prefix
+        prefixes[:prefix] = assets.prefix
+      end
+    end
+
     def mount_js_assets(prefix)
       mount_assets(:prefix => prefix, 
                    :extension => "js",
