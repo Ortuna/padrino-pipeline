@@ -19,6 +19,15 @@ describe 'Stylesheets' do
       assert_match '.home {', last_response.body
     end
  
+    context 'for SASS assets' do
+
+      it 'can retrieve a .scss asset by file name' do
+        get '/assets/stylesheets/sass.css'
+        assert_match 'body .div', last_response.body
+      end
+
+    end
+
     context 'for custom options' do
       let(:app) { rack_app }
       before do
