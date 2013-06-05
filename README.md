@@ -35,6 +35,8 @@ module Ortuna
       assets.append_path 'assets/stylesheets' # defaults to assets/stylesheets
       assets.js_prefix = '/custom/location'   # defaults to /assets/javascripts
       assets.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
+
+      assets.prefix = '/trunk' #general prefix, /trunk/assets/javascripts/xyz.js
     end
   end
 end

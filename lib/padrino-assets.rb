@@ -21,10 +21,19 @@ module Padrino
     def configure_assets(&block)
       original_js_prefix  = assets.js_prefix
       original_css_prefix = assets.css_prefix
+      original_prefix     = assets.prefix
 
       yield assets if block_given?
-      mount_js_assets(assets.js_prefix)   unless original_js_prefix  == assets.js_prefix
-      mount_css_assets(assets.css_prefix) unless original_css_prefix == assets.css_prefix
+      prefix = assets.prefix || ''
+      unless original_js_prefix  == assets.js_prefix && original_prefix == assets.prefix
+        mount_js_assets(prefix  + assets.js_prefix)
+      end
+      
+      unless original_css_prefix == assets.css_prefix && original_prefix == assets.prefix
+        mount_css_assets(prefix + assets.css_prefix)
+      end
+      
+
     end
 
     private
