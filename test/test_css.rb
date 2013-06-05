@@ -14,6 +14,11 @@ describe 'Stylesheets' do
       assert_match 'text/css', last_response.content_type
     end    
 
+    it 'works with directives' do
+      get '/assets/stylesheets/application.css'
+      assert_match '.home {', last_response.body
+    end
+ 
     context 'for custom options' do
       let(:app) { rack_app }
       before do
