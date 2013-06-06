@@ -1,7 +1,7 @@
 require 'padrino-core'
 require 'padrino-assets'
 
-class AssetsApp < Padrino::Application
+class AssetsAppSprockets < Padrino::Application
   register Padrino::Assets
 
   configure do
@@ -10,7 +10,7 @@ class AssetsApp < Padrino::Application
   end
 
   configure_assets do |assets|
-    assets.pipeline   = Padrino::Assets::Sprockets
+    assets.pipeline   = Padrino::Assets::AssetPack
   end
 
 

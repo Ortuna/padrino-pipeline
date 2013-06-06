@@ -1,4 +1,7 @@
 require File.join(File.dirname(__FILE__), '..' , 'extra', 'mini_shoulda')
+require File.expand_path(File.dirname(__FILE__) + '/../fixtures/assets_app/app_sprockets')
+require File.expand_path(File.dirname(__FILE__) + '/../fixtures/assets_app/app_asset_pack')
+
 require 'rack/test'
 require 'webrat'
 require 'padrino-helpers'
@@ -27,4 +30,8 @@ module Webrat
       @logger = nil
     end
   end
+end
+
+def pipelines
+  [Padrino::Assets::Sprockets]#, Padrino::Assets::AssetPack]
 end
