@@ -1,6 +1,5 @@
 require 'sprockets'
 require 'uglifier'
-require 'padrino-assets/ext/sprockets/environment'
 require 'padrino-assets/ext/padrino-helpers/asset_tag_helper'
 
 module Padrino
