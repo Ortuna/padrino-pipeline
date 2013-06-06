@@ -6,15 +6,15 @@ require 'padrino-assets/ext/padrino-helpers/asset_tag_helper'
 module Padrino
   module Assets
     class Sprockets
-      def initialize(app, assets)
-        @app      = app
-        @settings = assets
+      def initialize(app, config)
+        @app    = app
+        @config = config
         setup_enviroment
 
-        assets.paths ||= default_paths
-        assets.paths.each { |path| @app.settings.assets.append_path path }
-        mount_js_assets  (assets.prefix || '') + (assets.js_prefix  || '/assets/javascripts')
-        mount_css_assets (assets.prefix || '') + (assets.css_prefix || '/assets/stylesheets')
+        config.paths ||= default_paths
+        config.paths.each { |path| @app.settings.assets.append_path path }
+        mount_js_assets  (config.prefix || '') + (config.js_prefix  || '/assets/javascripts')
+        mount_css_assets (config.prefix || '') + (config.css_prefix || '/assets/stylesheets')
       end
 
       private
