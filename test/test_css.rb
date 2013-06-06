@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
+
 pipelines.each do |target_pipeline|
   target_pipeline_class = target_pipeline.to_s.split('::').last
   describe 'Stylesheets' do
@@ -31,11 +32,11 @@ pipelines.each do |target_pipeline|
       context 'for custom options' do
         let(:app) { rack_app }
         before do
-          @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/stylesheets')
+          @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/stylesheets')
         end
 
         it 'can modify the default asset path by configuration' do
-          assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/other')
+          assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/other')
           mock_app do
             register Padrino::Assets
             configure_assets do |assets|

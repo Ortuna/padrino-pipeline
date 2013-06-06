@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
-require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app_sprockets')
-require File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/app_asset_pack')
+require File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/sprockets_app')
+
 
 pipelines.each do |target_pipeline|
   target_pipeline_class = target_pipeline.to_s.split('::').last
@@ -45,7 +45,7 @@ pipelines.each do |target_pipeline|
       context 'for custom options' do
         let(:app) { rack_app }
         before do
-         @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/javascripts')
+         @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/javascripts')
         end
 
         it '#append_asset_path' do
