@@ -1,4 +1,5 @@
-require File.join(File.dirname(__FILE__), '..' , 'extra', 'mini_shoulda')
+require File.join(File.dirname(__FILE__), 'mini_shoulda')
+require File.join(File.dirname(__FILE__), '..' , 'fixtures', 'sprockets_app', 'sprockets_app')
 
 require 'rack/test'
 require 'webrat'
