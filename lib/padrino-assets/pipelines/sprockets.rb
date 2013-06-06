@@ -9,11 +9,7 @@ module Padrino
         @app    = app
         @config = config
         setup_enviroment
-
-        config.paths ||= default_paths
-        config.paths.each { |path| @app.settings.assets.append_path path }
-        mount_js_assets  (config.prefix || '') + (config.js_prefix  || '/assets/javascripts')
-        mount_css_assets (config.prefix || '') + (config.css_prefix || '/assets/stylesheets')
+        setup_sprockets
       end
 
       private
@@ -23,6 +19,13 @@ module Padrino
 
       def default_paths
         ["#{app_root}/assets/javascripts", "#{app_root}/assets/stylesheets"]
+      end
+
+      def setup_sprockets
+        @config.paths ||= default_paths
+        @config.paths.each { |path| @app.settings.assets.append_path path }
+        mount_js_assets  (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
+        mount_css_assets (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
       end
 
       def setup_enviroment
