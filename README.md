@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/Ortuna/padrino-assets.png)](https://codeclimate.com/github/Ortuna/padrino-assets)
 
 #padrino-assets
-This is an early version and work in progress for sprockets + padrino pipeline
+This is an early version and work in progress for padrino pipeline
 
 #Usage
 include in your padrino project
@@ -16,7 +16,9 @@ gem 'padrino-assets', :github => 'Ortuna/padrino-assets'
 module Ortuna
   class App < Padrino::Application
     register Padrino::Assets
-
+    configure_assets do |assets|
+      assets.pipeline = Padrino::Assets::Sprockets
+    end
   end
 end
 ```
@@ -31,8 +33,8 @@ module Ortuna
     register Padrino::Assets
 
     configure_assets do |assets|
-      assets.append_path 'assets/javascripts' # defaults to assets/javascript
-      assets.append_path 'assets/stylesheets' # defaults to assets/stylesheets
+      assets.pipeline = Padrino::Assets::Sprockets
+      assets.paths = ['assets/javascripts', 'assets/stylesheets'] # defaults to assets/stylesheets
       assets.js_prefix = '/custom/location'   # defaults to /assets/javascripts
       assets.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
 
