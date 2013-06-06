@@ -21,8 +21,8 @@ module Padrino
         css_prefix = (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
 
         @app.assets {
-          serve js_prefix,  from: 'assets/javascripts'
-          serve css_prefix, from: 'assets/stylesheets'
+          serve js_prefix,  :from => 'assets/javascripts'
+          serve css_prefix, :from => 'assets/stylesheets'
 
           # js :application, '/assets/javascripts/application.js', [
           #   'assets/javascripts/**/*.js',
