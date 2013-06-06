@@ -11,8 +11,6 @@ class AssetsApp < Padrino::Application
 
   configure_assets do |assets|
     assets.pipeline   = Padrino::Assets::Sprockets
-    assets.paths      = ["#{File.dirname(__FILE__)}/assets/javascripts",
-                         "#{File.dirname(__FILE__)}/assets/stylesheets" ]
   end
 
 

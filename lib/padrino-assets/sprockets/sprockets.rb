@@ -10,12 +10,22 @@ module Padrino
         @app      = app
         @settings = assets
         setup_enviroment
+
+        assets.paths ||= default_paths
         assets.paths.each { |path| @app.settings.assets.append_path path }
         mount_js_assets  (assets.prefix || '') + (assets.js_prefix  || '/assets/javascripts')
         mount_css_assets (assets.prefix || '') + (assets.css_prefix || '/assets/stylesheets')
       end
 
       private
+      def app_root
+        @app.settings.root
+      end
+
+      def default_paths
+        ["#{app_root}/assets/javascripts", "#{app_root}/assets/stylesheets"]
+      end
+
       def setup_enviroment
         @app.set :serve_assets, true
         @app.set :assets, ::Sprockets::Environment.new
