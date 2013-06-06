@@ -12,7 +12,10 @@ describe 'Asset tags' do
       mock_app do
         register Padrino::Assets
         register Padrino::Helpers
-        configure_assets { |assets| assets.append_path assets_location }
+        configure_assets do |assets| 
+          assets.pipeline = Padrino::Assets::Sprockets
+          assets.paths    = [assets_location]
+        end
         get('/') { render :erb, "<%= javascript_include_tag 'app.js' %>" }
       end
 

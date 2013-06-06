@@ -38,7 +38,10 @@ describe 'Stylesheets' do
         assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/other')
         mock_app do
           register Padrino::Assets
-          configure_assets { |assets| assets.append_path assets_location }
+          configure_assets do |assets|
+            assets.pipeline = Padrino::Assets::Sprockets
+            assets.paths    = [assets_location]
+          end
         end
 
         get '/assets/stylesheets/other.css'
@@ -50,7 +53,8 @@ describe 'Stylesheets' do
         mock_app do
           register Padrino::Assets
           configure_assets do |assets|
-            assets.append_path assets_location
+            assets.pipeline   = Padrino::Assets::Sprockets
+            assets.paths      = [assets_location]
             assets.css_prefix = '/myassets/items'
           end
         end
