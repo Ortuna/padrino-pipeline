@@ -7,9 +7,11 @@ describe 'AssetPack Javascripts' do
   it 'can get application.js' do
     get '/assets/javascripts/application.js'
     assert_equal 200, last_response.status
+    assert_match 'var mainApp = true;', last_response.body
   end
 
   it 'makes sure that manifest includes other scripts' do
+    skip
     get '/assets/javascripts/application.js'
     assert_match 'asdf', last_response.body
   end

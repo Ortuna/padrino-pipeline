@@ -24,13 +24,13 @@ module Padrino
           serve js_prefix,  from: 'assets/javascripts'
           serve css_prefix, from: 'assets/stylesheets'
 
-          js :application, '/assets/javascripts/application.js', [
-            'assets/javascripts/**/*.js',
-          ]
+          # js :application, '/assets/javascripts/application.js', [
+          #   'assets/javascripts/**/*.js',
+          # ]
 
-          css :application, '/css/application.css', [
-            '/css/screen.css'
-          ]
+          # css :application, '/css/application.css', [
+          #   '/css/screen.css'
+          # ]
 
           js_compression  :uglify
           css_compression :simple   # :simple | :sass | :yui | :sqwish
