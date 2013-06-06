@@ -33,5 +33,5 @@ module Webrat
 end
 
 def pipelines
-  [Padrino::Assets::Sprockets]#, Padrino::Assets::AssetPack]
+  [Padrino::Assets::Sprockets, Padrino::Assets::AssetPack]
 end

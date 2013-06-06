@@ -1,7 +1,7 @@
 require 'padrino-core'
 require 'padrino-assets'
 
-class AssetsAppSprockets < Padrino::Application
+class AssetsAppAssetPack < Padrino::Application
   register Padrino::Assets
 
   configure do
