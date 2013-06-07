@@ -1,1 +1,1 @@
-var otherVar = true;
+var otherFileVar = true;
