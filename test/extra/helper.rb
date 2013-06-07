@@ -21,6 +21,11 @@ class MiniTest::Spec
   def rack_app
     Rack::Lint.new(@app)
   end  
+
+  def fixture_path(fixture)
+    test_path = File.expand_path(File.dirname(__FILE__) + '/..')
+    "#{test_path}/fixtures/#{fixture}" 
+  end
 end
 
 module Webrat
@@ -34,3 +39,5 @@ end
 def pipelines
   [Padrino::Assets::Sprockets]#, Padrino::Assets::AssetPack]
 end
+
+

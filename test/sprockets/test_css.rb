@@ -1,8 +1,8 @@
-require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
 
 describe 'Stylesheets' do
   let(:app) { AssetsAppSprockets }
-  
+
   context 'for css assets' do
     it 'can retrieve an css asset by file name' do
       get '/assets/stylesheets/application.css'
@@ -31,11 +31,11 @@ describe 'Stylesheets' do
     context 'for custom options' do
       let(:app) { rack_app }
       before do
-        @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/stylesheets')
+        @assets_location = "#{fixture_path('sprockets_app')}/assets/stylesheets"
       end
 
       it 'can modify the default asset path by configuration' do
-        assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/other')
+        assets_location = "#{fixture_path('sprockets_app')}/assets/other"
         mock_app do
           register Padrino::Assets
           configure_assets do |assets|

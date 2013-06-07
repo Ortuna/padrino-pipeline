@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
-require File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/sprockets_app')
+require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../fixtures/sprockets_app/sprockets_app')
 
 
 describe 'Javascripts' do
@@ -42,7 +42,7 @@ describe 'Javascripts' do
     context 'for custom options' do
       let(:app) { rack_app }
       before do
-       @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/javascripts')
+       @assets_location =  "#{fixture_path('sprockets_app')}/assets/javascripts"
       end
 
       it '#append_asset_path' do

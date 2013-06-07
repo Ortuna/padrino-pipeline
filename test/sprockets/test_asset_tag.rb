@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
 
 describe 'Asset tags' do
 
@@ -7,7 +7,7 @@ describe 'Asset tags' do
 
     it 'can use the default javascript_include_tag to resolve JS asset' do
       skip
-      assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/assets_app/assets/javascripts')
+      assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
       mock_app do
         register Padrino::Assets
         register Padrino::Helpers

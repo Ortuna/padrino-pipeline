@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
 
 describe Padrino::Assets do
   let(:app) { AssetsAppSprockets }
@@ -9,7 +9,7 @@ describe Padrino::Assets do
     end
 
     it 'detects the root location of the running app' do
-      app_path = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app')
+      app_path = fixture_path('sprockets_app')
       assert_equal app_path, app.root
     end
   end
@@ -18,7 +18,7 @@ describe Padrino::Assets do
     let(:app) { rack_app }
     
     before do
-     @assets_location = File.expand_path(File.dirname(__FILE__) + '/fixtures/sprockets_app/assets/javascripts')
+     @assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
     end
 
     it 'can set a general prefix for all asset types' do
