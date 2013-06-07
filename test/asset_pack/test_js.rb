@@ -17,7 +17,9 @@ describe 'AssetPack Javascripts' do
   end
 
   it 'makes sure that coffeescript is compiled' do
-
+    get '/assets/javascripts/coffee.js'
+    assert_equal 200, last_response.status
+    assert_match 'coffee = true', last_response.body
   end
 
   it 'gives 404 for unknown files' do
@@ -28,5 +30,6 @@ describe 'AssetPack Javascripts' do
   context 'for non-defualt options' do
     let(:app) { mock_app }
     it 'can serve from another javascript path'
+    it 'can serve a non-default asset pack'
   end
 end
