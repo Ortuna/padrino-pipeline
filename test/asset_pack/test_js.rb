@@ -13,7 +13,7 @@ describe 'AssetPack Javascripts' do
   it 'makes sure that manifest includes other scripts' do
     get '/assets/javascripts/application.js'
     assert_equal 200, last_response.status
-    assert_match 'var otherFileVar', last_response.body
+    assert_match 'otherFileVar', last_response.body
   end
 
   it 'makes sure that coffeescript is compiled' do
