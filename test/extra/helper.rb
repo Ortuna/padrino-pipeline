@@ -36,8 +36,4 @@ module Webrat
   end
 end
 
-def pipelines
-  [Padrino::Assets::Sprockets]#, Padrino::Assets::AssetPack]
-end
-
 
