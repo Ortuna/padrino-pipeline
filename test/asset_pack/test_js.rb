@@ -4,19 +4,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../fixtures/asset_pack_app/a
 describe 'AssetPack Javascripts' do
   let(:app) { AssetsAppAssetPack }
 
-  it 'can get application.js' do
-    get '/assets/javascripts/application.js'
+  it 'can get a javascript file' do
+    get '/assets/javascripts/app.js'
     assert_equal 200, last_response.status
     assert_match 'var mainApp = true;', last_response.body
   end
 
   it 'makes sure that manifest includes other scripts' do
     get '/assets/javascripts/application.js'
-    File.open('/Users/ssingh/Desktop/untitled.html', 'w') do |f|
-      f.write(last_response.body)
-    end
     assert_equal 200, last_response.status
-    assert_match 'var otherFileVar = true;\n', last_response.body
+    assert_match 'var otherFileVar', last_response.body
   end
 
   it 'makes sure that coffeescript is compiled' do

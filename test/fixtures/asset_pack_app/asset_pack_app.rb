@@ -1,7 +1,7 @@
 require 'padrino-core'
 require 'padrino-assets'
 
-class AssetsAppAssetPack < Padrino::Application
+class AssetsAppAssetPack < Sinatra::Base
   register Padrino::Assets
 
   configure do
