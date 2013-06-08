@@ -42,7 +42,7 @@ describe 'Javascripts' do
     context 'for custom options' do
       let(:app) { rack_app }
       before do
-       @assets_location =  "#{fixture_path('sprockets_app')}/assets/javascripts"
+      @assets_location =  "#{fixture_path('sprockets_app')}/assets/javascripts"
       end
 
       it '#append_asset_path' do

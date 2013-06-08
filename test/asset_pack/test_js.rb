@@ -28,8 +28,17 @@ describe 'AssetPack Javascripts' do
   end
 
   context 'for non-defualt options' do
-    let(:app) { mock_app }
-    it 'can serve from another javascript path'
-    it 'can serve a non-default asset pack'
+    let(:app) { AssetsAppAssetPackCustom }
+
+    it 'can serve from another javascript path' do
+      get '/meow/javascripts/myapp.js'
+      assert_equal 200, last_response.status
+    end
+
+    it 'can serve a non-default asset pack' do
+      get '/assets/javascripts/application.js' 
+      assert_equal 200, last_response.status
+    end
+
   end
 end

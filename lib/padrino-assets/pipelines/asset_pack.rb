@@ -20,11 +20,11 @@ module Padrino
         js_prefix  = (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
         css_prefix = (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
 
+        js_assets  = @config.js_assets || 'assets/javascripts'
         @app.assets {
-          serve js_prefix,  :from => '/assets/javascripts'
-          serve css_prefix, :from => '/assets/stylesheets'
+          serve js_prefix, :from => js_assets
 
-          js :application, '/assets/javascripts/application.js', ['/assets/javascripts/*.js']
+          #js :application, '/assets/javascripts/application.js', ['/assets/javascripts/*.js']
 
           js_compression  :uglify
           css_compression :simple
