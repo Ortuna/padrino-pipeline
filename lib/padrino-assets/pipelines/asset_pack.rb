@@ -21,10 +21,14 @@ module Padrino
         css_prefix = (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
 
         js_assets  = @config.js_assets || 'assets/javascripts'
+        packages   = @config.packages  || []
+
         @app.assets {
           serve js_prefix, :from => js_assets
 
-          #js :application, '/assets/javascripts/application.js', ['/assets/javascripts/*.js']
+          packages.each do |package|
+            send(package.shift, *package) 
+          end
 
           js_compression  :uglify
           css_compression :simple

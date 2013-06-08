@@ -9,6 +9,7 @@ module Padrino
 
     def configure_assets(&block)
       assets = OpenStruct.new
+      assets.packages = []
       yield assets if block_given?
       assets.pipeline.new(self, assets)
     end
