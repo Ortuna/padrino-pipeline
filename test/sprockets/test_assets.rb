@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
 
-describe Padrino::Assets do
+describe Padrino::Pipeline do
   let(:app) { AssetsAppSprockets }
 
   context 'for application behavior' do
@@ -24,9 +24,9 @@ describe Padrino::Assets do
     it 'can set a general prefix for all asset types' do
       assets_location = @assets_location
       mock_app do
-        register Padrino::Assets
+        register Padrino::Pipeline
         configure_assets do |assets|
-          assets.pipeline = Padrino::Assets::Sprockets
+          assets.pipeline = Padrino::Pipeline::Sprockets
           assets.paths    = [assets_location]
           assets.prefix   = '/trunk'
         end

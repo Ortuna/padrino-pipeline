@@ -1,5 +1,5 @@
-require 'padrino-assets/pipelines/sprockets'
-require 'padrino-assets/pipelines/asset_pack'
+require 'padrino-pipeline/pipelines/sprockets'
+require 'padrino-pipeline/pipelines/asset_pack'
 require 'ostruct'
 
 module Padrino

@@ -48,9 +48,9 @@ describe 'Javascripts' do
       it '#append_asset_path' do
         assets_location = @assets_location
         mock_app do
-          register Padrino::Assets
+          register Padrino::Pipeline
           configure_assets do |assets| 
-            assets.pipeline = Padrino::Assets::Sprockets
+            assets.pipeline = Padrino::Pipeline::Sprockets
             assets.paths    = [assets_location]
           end
         end
@@ -62,9 +62,9 @@ describe 'Javascripts' do
       it '#js_prefix mounts assets to the correct spot' do
         assets_location = @assets_location
         mock_app do
-          register Padrino::Assets
+          register Padrino::Pipeline
           configure_assets do |assets|
-            assets.pipeline  = Padrino::Assets::Sprockets
+            assets.pipeline  = Padrino::Pipeline::Sprockets
             assets.paths     = [assets_location]
             assets.js_prefix = '/custom/location'
           end

@@ -1,8 +1,8 @@
 require 'padrino-core'
-require 'padrino-assets'
+require 'padrino-pipeline'
 
 class AssetsAppSprockets < Padrino::Application
-  register Padrino::Assets
+  register Padrino::Pipeline
 
   configure do
     set :logging, false
@@ -10,7 +10,7 @@ class AssetsAppSprockets < Padrino::Application
   end
 
   configure_assets do |assets|
-    assets.pipeline   = Padrino::Assets::Sprockets
+    assets.pipeline   = Padrino::Pipeline::Sprockets
   end
 
 

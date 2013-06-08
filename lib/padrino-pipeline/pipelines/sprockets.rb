@@ -1,9 +1,9 @@
 require 'sprockets'
 require 'uglifier'
-require 'padrino-assets/ext/padrino-helpers/asset_tag_helper'
+require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
 
 module Padrino
-  module Assets
+  module Pipeline 
     class Sprockets
       def initialize(app, config)
         @app    = app

@@ -1,7 +1,7 @@
 require 'sinatra/assetpack' unless defined? Sinatra::AssetPack
 
 module Padrino
-  module Assets
+  module Pipeline
     class AssetPack
       def initialize(app, config)
         @app    = app

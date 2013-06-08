@@ -37,9 +37,9 @@ describe 'Stylesheets' do
       it 'can modify the default asset path by configuration' do
         assets_location = "#{fixture_path('sprockets_app')}/assets/other"
         mock_app do
-          register Padrino::Assets
+          register Padrino::Pipeline
           configure_assets do |assets|
-            assets.pipeline = Padrino::Assets::Sprockets
+            assets.pipeline = Padrino::Pipeline::Sprockets
             assets.paths    = [assets_location]
           end
         end
@@ -51,9 +51,9 @@ describe 'Stylesheets' do
       it 'can modify the default css prefix by configuration' do
         assets_location = @assets_location
         mock_app do
-          register Padrino::Assets
+          register Padrino::Pipeline
           configure_assets do |assets|
-            assets.pipeline = Padrino::Assets::Sprockets
+            assets.pipeline = Padrino::Pipeline::Sprockets
             assets.paths      = [assets_location]
             assets.css_prefix = '/myassets/items'
           end

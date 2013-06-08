@@ -1,8 +1,8 @@
 require 'padrino-core'
-require 'padrino-assets'
+require 'padrino-pipeline'
 
 class BaseApp < Sinatra::Base
-  register Padrino::Assets
+  register Padrino::Pipeline
 
   configure do
     set :logging, false
@@ -14,13 +14,13 @@ end
 
 class AssetsAppAssetPack < BaseApp
   configure_assets do |config|
-    config.pipeline   = Padrino::Assets::AssetPack
+    config.pipeline   = Padrino::Pipeline::AssetPack
   end
 end
 
 class AssetsAppAssetPackCustom < BaseApp
   configure_assets do |config|
-    config.pipeline   = Padrino::Assets::AssetPack
+    config.pipeline   = Padrino::Pipeline::AssetPack
     config.js_prefix  = '/meow/javascripts'
     config.js_assets  = '/assets/js' 
     

@@ -9,10 +9,10 @@ describe 'Asset tags' do
       skip
       assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
       mock_app do
-        register Padrino::Assets
+        register Padrino::Pipeline
         register Padrino::Helpers
         configure_assets do |assets| 
-          assets.pipeline = Padrino::Assets::Sprockets
+          assets.pipeline = Padrino::Pipeline::Sprockets
           assets.paths    = [assets_location]
         end
         get('/') { render :erb, "<%= javascript_include_tag 'app.js' %>" }
