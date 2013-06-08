@@ -1,13 +1,13 @@
-[![Build Status](https://travis-ci.org/Ortuna/padrino-assets.png?branch=master)](https://travis-ci.org/Ortuna/padrino-assets)
-[![Code Climate](https://codeclimate.com/github/Ortuna/padrino-assets.png)](https://codeclimate.com/github/Ortuna/padrino-assets)
+[![Build Status](https://travis-ci.org/Ortuna/padrino-pipeline.png?branch=master)](https://travis-ci.org/Ortuna/padrino-pipeline)
+[![Code Climate](https://codeclimate.com/github/Ortuna/padrino-pipeline.png)](https://codeclimate.com/github/Ortuna/padrino-pipeline)
  
-#padrino-assets
+#padrino-pipeline
 This is an early version and work in progress for padrino pipeline
 
 #Usage
 include in your padrino project
 ```ruby
-gem 'padrino-assets', :github => 'Ortuna/padrino-assets'
+gem 'padrino-pipeline'
 ```
 
 ##Basic usage
@@ -15,9 +15,9 @@ gem 'padrino-assets', :github => 'Ortuna/padrino-assets'
 ```ruby
 module Ortuna
   class App < Padrino::Application
-    register Padrino::Assets
-    configure_assets do |assets|
-      assets.pipeline = Padrino::Assets::Sprockets
+    register Padrino::Pipeline
+    configure_assets do |config|
+      config.pipeline = Padrino::Pipeline::Sprockets
     end
   end
 end
@@ -30,15 +30,15 @@ from http://localhost:3000/assets/javascripts and http://localhost:3000/assets/s
 ```ruby
 module Ortuna
   class App < Padrino::Application
-    register Padrino::Assets
+    register Padrino::Pipeline
 
-    configure_assets do |assets|
-      assets.pipeline = Padrino::Assets::Sprockets
-      assets.paths = ['assets/javascripts', 'assets/stylesheets'] # defaults to assets/stylesheets
-      assets.js_prefix = '/custom/location'   # defaults to /assets/javascripts
-      assets.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
+    configure_assets do |config|
+      config.pipeline = Padrino::Pipeline::Sprockets
+      config.paths = ['assets/javascripts', 'assets/stylesheets'] # defaults to assets/stylesheets
+      config.js_prefix = '/custom/location'   # defaults to /assets/javascripts
+      config.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
 
-      assets.prefix = '/trunk' #general prefix, /trunk/assets/javascripts/xyz.js
+      config.prefix = '/trunk' #general prefix, /trunk/assets/javascripts/xyz.js
     end
   end
 end
