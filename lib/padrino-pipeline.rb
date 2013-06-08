@@ -5,7 +5,7 @@ require 'ostruct'
 module Padrino
   ##
   # Add public api docs here
-  module Assets
+  module Pipeline
 
     def configure_assets(&block)
       assets = OpenStruct.new

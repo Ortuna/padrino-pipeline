@@ -19,8 +19,8 @@ describe 'AssetPack Packages' do
 
     it 'can serve an asset pack from a non-standard location' do
       mock_app do
+        register Padrino::Pipeline
         configure_assets do |config|
-          register Padrino::Pipeline
           config.pipeline   = Padrino::Pipeline::AssetPack
           config.js_prefix  = '/meow/javascripts'
           config.packages << [:js, :application, '/meow/javascripts/application.js', ['/assets/javascripts/*.js']]
@@ -34,8 +34,8 @@ describe 'AssetPack Packages' do
   context 'for stylesheets' do
     it 'can serve an asset pack' do
       mock_app do
+        register Padrino::Pipeline
         configure_assets do |config|
-          register Padrino::Pipeline
           config.pipeline   = Padrino::Pipeline::AssetPack
           config.packages << [:css, :application, '/assets/stylesheets/application.css', ['/assets/stylesheets/*.css']]
         end
@@ -46,8 +46,8 @@ describe 'AssetPack Packages' do
 
     it 'can serve an asset pack from a non-standard location' do
       mock_app do
+        register Padrino::Pipeline
         configure_assets do |config|
-          register Padrino::Pipeline
           config.pipeline   = Padrino::Pipeline::AssetPack
           config.js_prefix  = '/meow/stylesheets'
           config.packages << [:css, :application, '/meow/stylesheets/application.css', ['/assets/stylesheets/*.css']]
