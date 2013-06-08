@@ -32,7 +32,30 @@ describe 'AssetPack Packages' do
   end
 
   context 'for stylesheets' do
+    it 'can serve an asset pack' do
+      mock_app do
+        register Padrino::Assets
+        configure_assets do |config|
+          config.pipeline   = Padrino::Assets::AssetPack
+          config.packages << [:css, :application, '/assets/stylesheets/application.css', ['/assets/stylesheets/*.css']]
+        end
+      end
+      get '/assets/stylesheets/application.css' 
+      assert_equal 200, last_response.status
+    end
 
-
+    it 'can serve an asset pack from a non-standard location' do
+      mock_app do
+        register Padrino::Assets
+        configure_assets do |config|
+          config.pipeline   = Padrino::Assets::AssetPack
+          config.js_prefix  = '/meow/stylesheets'
+          config.packages << [:css, :application, '/meow/stylesheets/application.css', ['/assets/stylesheets/*.css']]
+        end
+      end
+      get '/meow/stylesheets/application.css' 
+      assert_equal 200, last_response.status
+    end
   end
+
 end
