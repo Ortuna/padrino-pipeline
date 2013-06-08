@@ -20,11 +20,13 @@ module Padrino
         js_prefix  = (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
         css_prefix = (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
 
-        js_assets  = @config.js_assets || 'assets/javascripts'
-        packages   = @config.packages  || []
+        js_assets   = @config.js_assets || 'assets/javascripts'
+        css_assets  = @config.css_assets || 'assets/stylesheets'
+        packages    = @config.packages  || []
 
         @app.assets {
           serve js_prefix, :from => js_assets
+          serve css_prefix,:from => css_assets
 
           packages.each do |package|
             send(package.shift, *package) 

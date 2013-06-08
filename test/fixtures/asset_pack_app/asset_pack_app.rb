@@ -23,6 +23,9 @@ class AssetsAppAssetPackCustom < BaseApp
     config.pipeline   = Padrino::Assets::AssetPack
     config.js_prefix  = '/meow/javascripts'
     config.js_assets  = '/assets/js' 
+    
+    config.css_prefix  = '/meow/stylesheets'
+    config.css_assets  = '/assets/css' 
   end
 end
 
