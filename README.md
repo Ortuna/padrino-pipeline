@@ -36,7 +36,7 @@ module Ortuna
     configure_assets do |config|
       config.pipeline = Padrino::Pipeline::Sprockets
       config.js_assets  = ['assets/javascripts']
-      config.css_asstes = 'assets/stylesheets'
+      config.css_assets = 'assets/stylesheets'
       config.js_prefix = '/custom/location'   # defaults to /assets/javascripts
       config.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
 
