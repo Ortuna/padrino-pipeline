@@ -29,5 +29,28 @@ describe 'AssetPack Stylesheets' do
       assert_match '.meow', last_response.body 
     end
 
+    context 'for non-default css_assets path' do
+      let(:app) { rack_app }  
+      before do
+        @app_root = "#{fixture_path('asset_pack_app')}"
+      end
+
+      it '#css_assets can be an array' do
+        app_root = @app_root
+        mock_app do
+          set :root, app_root
+          register Padrino::Pipeline
+          configure_assets do |assets|
+            assets.pipeline = Padrino::Pipeline::AssetPack
+            assets.css_assets = ['/some/unkown/path/', 'assets/css', 'a/b/c']
+          end
+        end
+        get '/assets/stylesheets/meow.css'
+        assert_equal 200, last_response.status
+      end
+
+
+    end
+
   end
 end

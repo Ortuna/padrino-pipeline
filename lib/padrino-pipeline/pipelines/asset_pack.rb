@@ -42,8 +42,18 @@ module Padrino
         packages                = self.packages
 
         @app.assets {
-          serve js_prefix, :from => js_assets
-          serve css_prefix,:from => css_assets
+          if js_assets.respond_to?(:each)
+            js_assets.each {|asset| serve js_prefix, :from => asset} 
+          else
+            serve js_prefix, :from => js_assets
+          end
+
+          if css_assets.respond_to?(:each)
+            css_assets.each {|asset| serve css_prefix, :from => asset} 
+          else
+            serve css_prefix,:from => css_assets
+          end
+
 
           packages.each { |package| send(package.shift, *package) } 
 

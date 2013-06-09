@@ -29,5 +29,28 @@ describe 'AssetPack Javascripts' do
       assert_equal 200, last_response.status
     end
 
+    context 'for non-default js_assets path' do
+      let(:app) { rack_app }  
+      before do
+        @app_root = "#{fixture_path('asset_pack_app')}"
+      end
+
+      it '#js_assets can be an array' do
+        app_root = @app_root
+        mock_app do
+          set :root, app_root
+          register Padrino::Pipeline
+          configure_assets do |assets|
+            assets.pipeline = Padrino::Pipeline::AssetPack
+            assets.js_assets = ['/some/unkown/path/', 'assets/js', 'xtz/123']
+          end
+        end
+        get '/assets/javascripts/myapp.js'
+        assert_equal 200, last_response.status
+      end
+
+
+    end
+
   end
 end
