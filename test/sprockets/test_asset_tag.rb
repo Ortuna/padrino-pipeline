@@ -12,8 +12,8 @@ describe 'Asset tags' do
         register Padrino::Pipeline
         register Padrino::Helpers
         configure_assets do |assets| 
-          assets.pipeline = Padrino::Pipeline::Sprockets
-          assets.paths    = [assets_location]
+          assets.pipeline  = Padrino::Pipeline::Sprockets
+          assets.js_assets = [assets_location]
         end
         get('/') { render :erb, "<%= javascript_include_tag 'app.js' %>" }
       end

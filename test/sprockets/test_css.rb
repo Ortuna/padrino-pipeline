@@ -39,8 +39,8 @@ describe 'Stylesheets' do
         mock_app do
           register Padrino::Pipeline
           configure_assets do |assets|
-            assets.pipeline = Padrino::Pipeline::Sprockets
-            assets.paths    = [assets_location]
+            assets.pipeline   = Padrino::Pipeline::Sprockets
+            assets.css_assets = assets_location
           end
         end
 
@@ -54,7 +54,7 @@ describe 'Stylesheets' do
           register Padrino::Pipeline
           configure_assets do |assets|
             assets.pipeline = Padrino::Pipeline::Sprockets
-            assets.paths      = [assets_location]
+            assets.css_assets = assets_location
             assets.css_prefix = '/myassets/items'
           end
         end

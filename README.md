@@ -57,4 +57,18 @@ function stuff() {
 
 }
 ```
+##sinatra-assetpack pipeline
+```ruby
+class AssetsAppAssetPackCustom < BaseApp
+  configure_assets do |config|
+    config.pipeline   = Padrino::Pipeline::AssetPack
+    config.js_prefix  = '/meow/javascripts'
+    config.js_assets  = '/assets/js' 
+    
+    config.css_prefix  = '/meow/stylesheets'
+    config.css_assets  = '/assets/css'
+  end
+end
+```
+Since sinatra-assetpack has a different way of serving 
 

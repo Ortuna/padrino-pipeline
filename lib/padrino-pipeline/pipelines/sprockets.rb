@@ -6,24 +6,31 @@ module Padrino
   module Pipeline 
     class Sprockets
       def initialize(app, config)
-        @app    = app
-        @config = config
+        @app       = app
+        @config    = config
+        setup_paths
         setup_enviroment
         setup_sprockets
       end
 
       private
+      def setup_paths
+        @js_assets  = @config.js_assets  || "#{app_root}/assets/javascripts"
+        @css_assets = @config.css_assets || "#{app_root}/assets/stylesheets"
+      end
+
       def app_root
         @app.settings.root
       end
 
-      def default_paths
-        ["#{app_root}/assets/javascripts", "#{app_root}/assets/stylesheets"]
+      def paths
+        js_assets = @js_assets.respond_to?(:each) ? @js_assets : [@js_assets]
+        css_assets = @css_assets.respond_to?(:each) ? @css_assets : [@css_assets]
+        js_assets + css_assets
       end
 
       def setup_sprockets
-        @config.paths ||= default_paths
-        @config.paths.each { |path| @app.settings.assets.append_path path }
+        paths.each { |path| @app.settings.assets.append_path path }
         mount_js_assets  (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
         mount_css_assets (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
       end

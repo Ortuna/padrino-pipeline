@@ -26,9 +26,9 @@ describe Padrino::Pipeline do
       mock_app do
         register Padrino::Pipeline
         configure_assets do |assets|
-          assets.pipeline = Padrino::Pipeline::Sprockets
-          assets.paths    = [assets_location]
-          assets.prefix   = '/trunk'
+          assets.pipeline  = Padrino::Pipeline::Sprockets
+          assets.js_assets = assets_location
+          assets.prefix    = '/trunk'
         end
       end
 

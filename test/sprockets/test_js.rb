@@ -50,8 +50,8 @@ describe 'Javascripts' do
         mock_app do
           register Padrino::Pipeline
           configure_assets do |assets| 
-            assets.pipeline = Padrino::Pipeline::Sprockets
-            assets.paths    = [assets_location]
+            assets.pipeline  = Padrino::Pipeline::Sprockets
+            assets.js_assets = assets_location
           end
         end
 
@@ -65,7 +65,7 @@ describe 'Javascripts' do
           register Padrino::Pipeline
           configure_assets do |assets|
             assets.pipeline  = Padrino::Pipeline::Sprockets
-            assets.paths     = [assets_location]
+            assets.js_assets = assets_location
             assets.js_prefix = '/custom/location'
           end
         end#mock-app
