@@ -42,18 +42,16 @@ module Padrino
         packages                = self.packages
 
         @app.assets {
-          if js_assets.respond_to?(:each)
-            js_assets.each {|asset| serve js_prefix, :from => asset} 
-          else
-            serve js_prefix, :from => js_assets
+          def mount_asset(prefix, assets)
+            if assets.respond_to?(:each)
+              assets.each {|asset| serve prefix, :from => asset} 
+            else
+              serve prefix, :from => assets
+            end
           end
 
-          if css_assets.respond_to?(:each)
-            css_assets.each {|asset| serve css_prefix, :from => asset} 
-          else
-            serve css_prefix,:from => css_assets
-          end
-
+          mount_asset js_prefix,  js_assets
+          mount_asset css_prefix, css_assets
 
           packages.each { |package| send(package.shift, *package) } 
 
