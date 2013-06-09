@@ -31,4 +31,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency("sinatra-assetpack", "~> 0.2.0")
   s.add_dependency("padrino-core", "~> 0.11.0")
+
+  s.add_development_dependency("nokogiri", "~>1.5.0")
 end
