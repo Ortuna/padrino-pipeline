@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Ortuna/padrino-pipeline.png?branch=master)](https://travis-ci.org/Ortuna/padrino-pipeline)
 [![Code Climate](https://codeclimate.com/github/Ortuna/padrino-pipeline.png)](https://codeclimate.com/github/Ortuna/padrino-pipeline)
+[![Dependency Status](https://gemnasium.com/Ortuna/padrino-pipeline.png)](https://gemnasium.com/Ortuna/padrino-pipeline)
  
 #padrino-pipeline
 This is an early version and work in progress for padrino pipeline
