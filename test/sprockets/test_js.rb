@@ -74,6 +74,21 @@ describe 'Javascripts' do
         assert_equal 200, last_response.status
       end
 
+      it '#js_assets can be an array' do
+        assets_location = @assets_location
+        mock_app do
+          register Padrino::Pipeline
+          configure_assets do |assets|
+            assets.pipeline  = Padrino::Pipeline::Sprockets
+            assets.js_assets = ['some/unknown/source', assets_location]
+            assets.js_prefix = '/custom/location'
+          end
+        end  
+        get '/custom/location/app.js'
+        assert_match 'var in_second_file', last_response.body
+        assert_equal 200, last_response.status
+      end
+
     end#context
   end#context
 end#describe

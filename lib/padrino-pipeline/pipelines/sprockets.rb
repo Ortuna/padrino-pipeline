@@ -24,7 +24,7 @@ module Padrino
       end
 
       def paths
-        js_assets = @js_assets.respond_to?(:each) ? @js_assets : [@js_assets]
+        js_assets  = @js_assets.respond_to?(:each) ? @js_assets : [@js_assets]
         css_assets = @css_assets.respond_to?(:each) ? @css_assets : [@css_assets]
         js_assets + css_assets
       end

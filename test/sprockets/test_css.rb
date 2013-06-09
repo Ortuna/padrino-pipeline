@@ -63,6 +63,21 @@ describe 'Stylesheets' do
         assert_equal 200, last_response.status
       end
 
+      it '#css_assets can be an array' do
+        assets_location = @assets_location
+        mock_app do
+          register Padrino::Pipeline
+          configure_assets do |assets|
+            assets.pipeline  = Padrino::Pipeline::Sprockets
+            assets.css_assets = ['some/unknown/source', assets_location]
+            assets.css_prefix = '/custom/location'
+          end
+        end  
+        get '/custom/location/application.css'
+        assert_equal 200, last_response.status
+      end
+
+
     end #context
   end #context
 end #describe
