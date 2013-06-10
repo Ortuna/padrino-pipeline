@@ -1,16 +1,23 @@
+#Padrino Pipeline
+Padrino Pipeline is a gem for [Padrino](http://www.padrinorb.com).  It provides 
+a unified way to use several different asset management systems.
+
 [![Build Status](https://travis-ci.org/Ortuna/padrino-pipeline.png?branch=master)](https://travis-ci.org/Ortuna/padrino-pipeline)
 [![Code Climate](https://codeclimate.com/github/Ortuna/padrino-pipeline.png)](https://codeclimate.com/github/Ortuna/padrino-pipeline)
 [![Dependency Status](https://gemnasium.com/Ortuna/padrino-pipeline.png)](https://gemnasium.com/Ortuna/padrino-pipeline)
- 
-#padrino-pipeline
-Padrino Pipeline is a gem for [Padrino](http://www.padrinorb.com).  It provides 
-a unified way to use several different asset management systems.
+
 
 ##Supported Pipelines
 - [Sprockets](https://github.com/sstephenson/sprockets)
 - [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack)
 
 ##Simple Usage
+
+### Gemfile
+Add to your Gemfile:
+```ruby
+gem 'padrino-pipeline'
+```
 
 These examples examples setup a pipeline with defaulted options(see default options):
 
