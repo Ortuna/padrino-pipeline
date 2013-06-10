@@ -3,18 +3,20 @@
 [![Dependency Status](https://gemnasium.com/Ortuna/padrino-pipeline.png)](https://gemnasium.com/Ortuna/padrino-pipeline)
  
 #padrino-pipeline
-This is an early version and work in progress for padrino pipeline
+Padrino Pipeline is a gem for [Padrino](http://www.padrinorb.com).  It provides 
+a unified way to use several different asset management systems.
 
-#Usage
-include in your padrino project
+##Supported Pipelines
+- [Sprockets](https://github.com/sstephenson/sprockets)
+- [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack)
+
+##Simple Usage
+
+These examples examples setup a pipeline with defaulted options(see default options):
+
+### Sprockets pipeline
 ```ruby
-gem 'padrino-pipeline'
-```
-
-##Basic usage
-
-```ruby
-module Ortuna
+module Example
   class App < Padrino::Application
     register Padrino::Pipeline
     configure_assets do |config|
@@ -24,53 +26,56 @@ module Ortuna
 end
 ```
 
-This should default app/assets/javascripts and app/assets/stylesheets to be served
-from http://localhost:3000/assets/javascripts and http://localhost:3000/assets/styleseets
-
-##Usage with options
+### Sinatra AssetPack pipeline
 ```ruby
-module Ortuna
+module Example
   class App < Padrino::Application
     register Padrino::Pipeline
-
     configure_assets do |config|
-      config.pipeline = Padrino::Pipeline::Sprockets
-      config.js_assets  = ['assets/javascripts']
-      config.css_assets = 'assets/stylesheets'
-      config.js_prefix = '/custom/location'   # defaults to /assets/javascripts
-      config.css_prefix = '/custom/stylesheets'   # defaults to /assets/stylesheets
-
-      config.prefix = '/trunk' #general prefix, /trunk/assets/javascripts/xyz.js
+      config.pipeline = Padrino::Pipeline::AssetPack
     end
   end
 end
 ```
 
-visit `http://localhost:3000/custom/location/app.js` will map to the file
-app/assets/javascripts/app.js
+## Options
+Certain options can be configured to change the behavior of the pipelines.
+These options should be used within the configure_assets block.
 
-visit `http://localhost:3000/custom/stylesheets/main.css` will map to the file
-app/assets/stylesheets/main.css
-
-use sprockets helpers like you would:
-```javascript
-//= require stuff
-function stuff() {
-
-}
-```
-##sinatra-assetpack pipeline
+for example:
 ```ruby
-class AssetsAppAssetPackCustom < BaseApp
-  configure_assets do |config|
-    config.pipeline   = Padrino::Pipeline::AssetPack
-    config.js_prefix  = '/meow/javascripts'
-    config.js_assets  = '/assets/js' 
-    
-    config.css_prefix  = '/meow/stylesheets'
-    config.css_assets  = '/assets/css'
+module Example
+  class App < Padrino::Application
+    register Padrino::Pipeline
+    configure_assets do |config|
+      config.pipeline = Padrino::Pipeline::AssetPack
+      config.css_prefix = '/xyz'
+    end
   end
 end
 ```
-Since sinatra-assetpack has a different way of serving 
 
+The following options can be set
+
+### Pipeline
+- #pipeline
+
+### Assets URI(mounting location) String
+- #css_prefix
+- #js_prefix
+
+### Asset location(path to files) String/Array
+- #css_assets
+- #js_assets
+
+### Prefix prepend this prefix before all assets
+- #prefix
+
+### Default option values
+TODO
+
+## Asset pack packages
+TODO
+
+## Sprocket directive require/include/require tree
+TODO
