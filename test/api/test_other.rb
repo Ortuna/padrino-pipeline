@@ -8,14 +8,13 @@ shared_examples_for 'A Pipeline' do
     end
 
     it 'knows that assets should be served' do
-      skip
       pipeline = @pipeline
       mock_app do
         register Padrino::Pipeline
         configure_assets {|c| c.pipeline  = pipeline}
       end
       
-      assert_equal true, app.serve_assets?
+      assert_equal true, @app.serve_assets?
     end
 
     it 'can set a general prefix for all asset types' do
