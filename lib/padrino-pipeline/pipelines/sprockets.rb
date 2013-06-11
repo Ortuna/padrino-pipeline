@@ -11,8 +11,8 @@ module Padrino
       def initialize(app, config)
         @app       = app
         @config    = config
-        setup_paths
         setup_enviroment
+        setup_paths
         setup_sprockets
       end
 
