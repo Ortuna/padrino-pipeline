@@ -1,5 +1,6 @@
 require 'padrino-pipeline/pipelines/sprockets'
 require 'padrino-pipeline/pipelines/asset_pack'
+require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
 require 'ostruct'
 
 module Padrino

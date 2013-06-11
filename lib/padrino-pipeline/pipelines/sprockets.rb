@@ -1,6 +1,5 @@
 require 'sprockets'
 require 'uglifier'
-require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
 require 'padrino-pipeline/pipelines/common'
 
 module Padrino
