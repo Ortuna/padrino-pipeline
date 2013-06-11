@@ -12,14 +12,13 @@ module Padrino
         @app       = app
         @config    = config
         setup_enviroment
-        setup_paths
         setup_sprockets
       end
 
       private
       def paths
-        js_assets  = @js_assets.kind_of?(Array) ? @js_assets : [@js_assets]
-        css_assets = @css_assets.kind_of?(Array) ? @css_assets : [@css_assets]
+        js_assets  = self.js_assets.kind_of?(Array) ? self.js_assets : [self.js_assets]
+        css_assets = self.css_assets.kind_of?(Array) ? self.css_assets : [self.css_assets]
         js_assets + css_assets
       end
 

@@ -10,7 +10,6 @@ module Padrino
         @app    = app
         @config = config
         setup_enviroment
-        setup_paths
         setup_pipeline
       end
 
@@ -26,7 +25,7 @@ module Padrino
 
       def setup_pipeline
         js_prefix, css_prefix   = self.js_prefix, self.css_prefix
-        js_assets, css_assets   = @js_assets, @css_assets
+        js_assets, css_assets   = self.js_assets, self.css_assets
         packages                = self.packages
 
         @app.assets {
