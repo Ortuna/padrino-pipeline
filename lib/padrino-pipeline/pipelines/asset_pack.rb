@@ -37,8 +37,8 @@ module Padrino
             end
           end
 
-          mount_asset js_prefix,  js_assets
-          mount_asset css_prefix, css_assets
+          mount_asset js_prefix,    js_assets
+          mount_asset css_prefix,   css_assets
           mount_asset image_prefix, image_assets
 
           packages.each { |package| send(package.shift, *package) } 

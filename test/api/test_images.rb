@@ -37,7 +37,7 @@ shared_examples_for 'A Pipeline' do
       mock_app do
         register Padrino::Pipeline
         configure_assets do |assets| 
-          assets.pipeline   = pipeline
+          assets.pipeline     = pipeline
           assets.image_assets = assets_location
         end
       end
@@ -46,6 +46,51 @@ shared_examples_for 'A Pipeline' do
       assert_equal 200, last_response.status
     end
 
+    it 'get image asset from a custom location(Array)' do
+      assets_location = @assets_location
+      pipeline        = @pipeline
+      mock_app do
+        register Padrino::Pipeline
+        configure_assets do |assets| 
+          assets.pipeline     = pipeline
+          assets.image_assets = ['some/unkown/place', assets_location]
+        end
+      end
+
+      get '/assets/images/glass.png'
+      assert_equal 200, last_response.status
+    end
+
+    it 'get image asset form custom URI' do
+      assets_location = @assets_location
+      pipeline        = @pipeline
+      mock_app do
+        register Padrino::Pipeline
+        configure_assets do |assets|
+          assets.pipeline  = pipeline
+          assets.image_assets = assets_location
+          assets.image_prefix = '/custom/location'
+        end
+      end#mock-app
+      get '/custom/location/glass.png'
+      assert_equal 200, last_response.status
+    end
+
+    it 'get image asset form custom prefix' do
+      assets_location = @assets_location
+      pipeline        = @pipeline
+      mock_app do
+        register Padrino::Pipeline
+        configure_assets do |assets|
+          assets.pipeline  = pipeline
+          assets.image_assets = assets_location
+          assets.prefix  = '/custom'
+        end
+      end#mock-app
+      get '/custom/assets/images/glass.png'
+      assert_equal 200, last_response.status
+    end
+   
   end
 end
 
