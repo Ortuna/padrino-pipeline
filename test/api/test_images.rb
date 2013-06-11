@@ -21,8 +21,31 @@ shared_examples_for 'A Pipeline' do
 
     it 'gives 404 for unkown image files' do
       get '/assets/images/unkown.png'
-      assert_equal 400, last_response.status
+      assert_equal 404, last_response.status
     end
+  end
+
+  describe 'custom options' do
+    let(:app) { rack_app }
+    before do
+      @assets_location =  "#{fixture_path('sprockets_app')}/assets/images"
+    end
+
+    it 'get image asset from a custom location' do
+      assets_location = @assets_location
+      pipeline        = @pipeline
+      mock_app do
+        register Padrino::Pipeline
+        configure_assets do |assets| 
+          assets.pipeline   = pipeline
+          assets.image_assets = assets_location
+        end
+      end
+
+      get '/assets/images/glass.png'
+      assert_equal 200, last_response.status
+    end
+
   end
 end
 
