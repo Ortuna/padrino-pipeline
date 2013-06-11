@@ -14,6 +14,14 @@ module Padrino
         @config.css_assets || "#{app_root}/assets/stylesheets"
       end
 
+      def images_prefix
+        '/assets/images'
+      end
+
+      def images_assets
+        "#{app_root}/assets/images"
+      end
+
       def js_prefix
         (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
       end

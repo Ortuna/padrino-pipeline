@@ -24,8 +24,8 @@ module Padrino
       end
 
       def setup_pipeline
-        js_prefix, css_prefix   = self.js_prefix, self.css_prefix
-        js_assets, css_assets   = self.js_assets, self.css_assets
+        js_prefix, css_prefix, images_prefix = self.js_prefix, self.css_prefix, self.images_prefix
+        js_assets, css_assets, images_assets = self.js_assets, self.css_assets, self.images_assets
         packages                = self.packages
 
         @app.assets {
@@ -39,6 +39,7 @@ module Padrino
 
           mount_asset js_prefix,  js_assets
           mount_asset css_prefix, css_assets
+          mount_asset images_prefix, images_assets
 
           packages.each { |package| send(package.shift, *package) } 
 
