@@ -1,12 +1,16 @@
 require 'sinatra/assetpack' unless defined? Sinatra::AssetPack
+require 'padrino-pipeline/pipelines/common'
 
 module Padrino
   module Pipeline
     class AssetPack
+      include Padrino::Pipeline::Common
+      
       def initialize(app, config)
         @app    = app
         @config = config
         setup_enviroment
+        setup_paths
         setup_pipeline
       end
 
@@ -16,14 +20,6 @@ module Padrino
 
       def css_prefix
         (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
-      end
-
-      def js_assets
-        @config.js_assets || 'assets/javascripts'
-      end
-
-      def css_assets
-        @config.css_assets || 'assets/stylesheets'
       end
 
       def packages
@@ -38,7 +34,7 @@ module Padrino
 
       def setup_pipeline
         js_prefix, css_prefix   = self.js_prefix, self.css_prefix
-        js_assets, css_assets   = self.js_assets, self.css_assets
+        js_assets, css_assets   = @js_assets, @css_assets
         packages                = self.packages
 
         @app.assets {

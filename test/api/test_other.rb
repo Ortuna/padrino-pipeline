@@ -18,7 +18,6 @@ shared_examples_for 'A Pipeline' do
       assert_equal true, app.serve_assets?
     end
 
-
     it 'can set a general prefix for all asset types' do
       assets_location = @assets_location
       pipeline        = @pipeline

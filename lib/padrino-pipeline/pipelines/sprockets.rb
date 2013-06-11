@@ -1,10 +1,13 @@
 require 'sprockets'
 require 'uglifier'
 require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
+require 'padrino-pipeline/pipelines/common'
 
 module Padrino
   module Pipeline 
     class Sprockets
+      include Padrino::Pipeline::Common
+      
       def initialize(app, config)
         @app       = app
         @config    = config
@@ -14,15 +17,6 @@ module Padrino
       end
 
       private
-      def setup_paths
-        @js_assets  = @config.js_assets  || "#{app_root}/assets/javascripts"
-        @css_assets = @config.css_assets || "#{app_root}/assets/stylesheets"
-      end
-
-      def app_root
-        @app.settings.root
-      end
-
       def paths
         js_assets  = @js_assets.kind_of?(Array) ? @js_assets : [@js_assets]
         css_assets = @css_assets.kind_of?(Array) ? @css_assets : [@css_assets]
