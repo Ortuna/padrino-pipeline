@@ -7,7 +7,7 @@ module Padrino
   module Pipeline 
     class Sprockets
       include Padrino::Pipeline::Common
-      
+
       def initialize(app, config)
         @app       = app
         @config    = config
@@ -25,8 +25,8 @@ module Padrino
 
       def setup_sprockets
         paths.each { |path| @app.settings.assets.append_path path }
-        mount_js_assets  (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
-        mount_css_assets (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
+        mount_js_assets  js_prefix 
+        mount_css_assets css_prefix
       end
 
       def setup_enviroment

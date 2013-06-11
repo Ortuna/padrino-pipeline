@@ -5,21 +5,13 @@ module Padrino
   module Pipeline
     class AssetPack
       include Padrino::Pipeline::Common
-      
+
       def initialize(app, config)
         @app    = app
         @config = config
         setup_enviroment
         setup_paths
         setup_pipeline
-      end
-
-      def js_prefix
-        (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
-      end
-
-      def css_prefix
-        (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
       end
 
       def packages
