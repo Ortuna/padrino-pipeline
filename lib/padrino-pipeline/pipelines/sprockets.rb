@@ -32,7 +32,8 @@ module Padrino
       def setup_enviroment
         @app.set :serve_assets, true
         @app.set :assets, ::Sprockets::Environment.new
-        @app.settings.assets.js_compressor  = Uglifier.new(:mangle => true)
+        @app.settings.assets.js_compressor   = Uglifier.new(:mangle => true)
+        @app.settings.assets.css_compressor  = :sass
       end
 
       def mount_image_assets(prefix)

@@ -21,7 +21,7 @@ shared_examples_for 'A Pipeline' do
     it 'makes sure that sass is compiled' do
       get '/assets/stylesheets/default.css'
       assert_equal 200, last_response.status
-      assert_match ".content {\n  display: none; }\n", last_response.body
+      assert_match ".content", last_response.body
     end
 
     it 'can not get a file other than .css' do
