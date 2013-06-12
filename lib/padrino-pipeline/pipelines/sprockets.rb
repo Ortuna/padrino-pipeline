@@ -36,10 +36,6 @@ module Padrino
       end
 
       def mount_image_assets(prefix)
-        @app.get "#{prefix}/:path.:extension" do |path, ext|
-          content_type(content_type || Rack::Mime::MIME_TYPES[".#{ext}"])
-          settings.assets["#{path}.#{ext}"] || not_found
-        end
         mount_assets(:prefix => prefix)
       end
 
