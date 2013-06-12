@@ -9,7 +9,7 @@ shared_examples_for 'A Pipeline' do
       mock_app do
         register Padrino::Pipeline
         configure_assets do |config|
-          config.pipeline = pipeline
+          config.pipeline   = pipeline
           config.css_assets = "#{assets_location}/stylesheets"
           config.js_assets  = "#{assets_location}/javascripts"
         end

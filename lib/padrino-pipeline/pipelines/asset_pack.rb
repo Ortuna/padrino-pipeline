@@ -42,7 +42,7 @@ module Padrino
           mount_asset css_prefix,   css_assets
           mount_asset image_prefix, image_assets
 
-          packages.each { |package| send(package.shift, *package) } 
+          packages.each { |package| send(package.shift, *package) }
           if compression_enabled
             js_compression  :uglify
             css_compression :sass
