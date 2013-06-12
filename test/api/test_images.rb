@@ -19,6 +19,11 @@ shared_examples_for 'A Pipeline' do
       assert_equal 200, last_response.status
     end
 
+    it 'should have the right content type' do
+      get '/assets/images/glass.png' 
+      assert_equal 'image/png', last_response.content_type
+    end
+
     it 'gives 404 for unkown image files' do
       skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
       get '/assets/images/unkown.png'

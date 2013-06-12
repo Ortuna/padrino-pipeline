@@ -30,6 +30,13 @@ shared_examples_for 'A Pipeline' do
       assert_match 'application/javascript', last_response.content_type
     end
 
+    it 'can not get a file other than .js' do
+      skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
+      get '/assets/javscripts/coffee.coffee'
+      assert_equal 404, last_response.status
+    end
+
+
     it 'gives 404 for unknown JS file' do
       skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
       get '/assets/javascripts/doesnotexist.js'

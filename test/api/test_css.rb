@@ -24,6 +24,12 @@ shared_examples_for 'A Pipeline' do
       assert_match ".content {\n  display: none; }\n", last_response.body
     end
 
+    it 'can not get a file other than .css' do
+      skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
+      get '/assets/stylesheets/default.scss'
+      assert_equal 404, last_response.status
+    end
+
     it 'gives 404 for unknown files' do
       skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
       get '/assets/stylesheets/omg.css'

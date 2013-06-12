@@ -36,19 +36,21 @@ module Padrino
       end
 
       def mount_image_assets(prefix)
-        @app.get "#{prefix}/:file" do
-          settings.assets["#{params[:file]}"] || not_found
+        @app.get "#{prefix}/:path.:extension" do |path, ext|
+          content_type(content_type || Rack::Mime::MIME_TYPES[".#{ext}"])
+          settings.assets["#{path}.#{ext}"] || not_found
         end
+        mount_assets(:prefix => prefix)
       end
 
       def mount_js_assets(prefix)
-        mount_assets(:prefix => prefix, 
+        mount_assets(:prefix => prefix,
                      :extension => "js",
                      :content_type => "application/javascript")
       end
 
       def mount_css_assets(prefix)
-        mount_assets(:prefix => prefix, 
+        mount_assets(:prefix => prefix,
                      :extension => "css",
                      :content_type => "text/css")
       end
@@ -57,9 +59,10 @@ module Padrino
         prefix       = options[:prefix]
         extension    = options[:extension]
         content_type = options[:content_type]
-        @app.get "#{prefix}/:file.#{extension}" do
-          content_type(content_type)
-          settings.assets["#{params[:file]}.#{extension}"] || not_found
+        @app.get "#{prefix}/:path.:ext" do |path, ext|
+          return not_found if (extension && ext != extension)
+          content_type(content_type || Rack::Mime::MIME_TYPES[".#{ext}"])
+          settings.assets["#{path}.#{ext}"] || not_found
         end
       end
 
