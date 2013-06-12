@@ -30,6 +30,9 @@ module Padrino
         (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
       end
 
+      def serve_compressed?
+        @config.enable_compression || PADRINO_ENV == "production"
+      end
     end
   end
 end

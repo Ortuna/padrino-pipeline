@@ -26,7 +26,8 @@ module Padrino
       def setup_pipeline
         js_prefix, css_prefix, image_prefix = self.js_prefix, self.css_prefix, self.image_prefix
         js_assets, css_assets, image_assets = self.js_assets, self.css_assets, self.image_assets
-        packages = self.packages
+        packages            = self.packages
+        compression_enabled = serve_compressed?
 
         @app.assets {
           def mount_asset(prefix, assets)
@@ -42,9 +43,10 @@ module Padrino
           mount_asset image_prefix, image_assets
 
           packages.each { |package| send(package.shift, *package) } 
-
-          js_compression  :uglify
-          css_compression :sass
+          if compression_enabled
+            js_compression  :uglify
+            css_compression :sass
+          end
         }
       end
     end
