@@ -44,7 +44,7 @@ module Padrino
           packages.each { |package| send(package.shift, *package) } 
 
           js_compression  :uglify
-          css_compression :simple
+          css_compression :sass
         }
       end
     end
