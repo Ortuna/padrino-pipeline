@@ -11,6 +11,7 @@ module Padrino
         @config = config
         setup_enviroment
         setup_pipeline
+        setup_tasks
       end
 
       def packages
@@ -18,6 +19,10 @@ module Padrino
       end
 
       private
+      def setup_tasks
+        Padrino::Tasks.files.concat "#{File.dirname(__FILE__)}/../tasks/precompile_assetpack.rb"
+      end
+
       def setup_enviroment
         @app.set :serve_assets, true
         @app.register Sinatra::AssetPack
