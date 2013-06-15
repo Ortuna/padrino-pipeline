@@ -82,7 +82,18 @@ The following options can be set
 TODO
 
 ## Asset pack packages
-TODO
+```ruby
+  module Example
+    class App < Padrino::Application
+      register Padrino::Pipeline
+      configure_assets do |config|
+        config.pipeline   = Padrino::Pipeline::AssetPack
+        config.packages << [:js, :application, '/assets/javascripts/application.js', ['/assets/javascripts/*.js']]
+      end
+    end
+  end
+```
+Will serve /assets/javascripts/application.js as a bundle
 
 ## Sprocket directive require/include/require tree
 TODO
