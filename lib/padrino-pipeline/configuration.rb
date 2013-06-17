@@ -9,6 +9,9 @@ module Padrino
 
       def initialize
         @packages = []
+        @image_prefix = '/assets/images'
+        @js_prefix    = '/assets/javascripts'
+        @css_prefix   = '/assets/stylesheets'
       end
 
     end

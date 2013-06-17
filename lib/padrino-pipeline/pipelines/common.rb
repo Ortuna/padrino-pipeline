@@ -19,15 +19,15 @@ module Padrino
       end
 
       def image_prefix
-        (@config.prefix || '') + (@config.image_prefix || '/assets/images')
+        (@config.prefix || '') + @config.image_prefix
       end
 
       def js_prefix
-        (@config.prefix || '') + (@config.js_prefix  || '/assets/javascripts')
+        (@config.prefix || '') + @config.js_prefix
       end
 
       def css_prefix
-        (@config.prefix || '') + (@config.css_prefix || '/assets/stylesheets')
+        (@config.prefix || '') + @config.css_prefix
       end
 
       def serve_compressed?
