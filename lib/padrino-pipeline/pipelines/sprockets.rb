@@ -24,9 +24,9 @@ module Padrino
 
       def setup_sprockets
         paths.each { |path| @app.settings.assets.append_path path }
-        mount_js_assets    js_prefix 
-        mount_css_assets   css_prefix
-        mount_image_assets image_prefix
+        mount_js_assets    @config.js_prefix 
+        mount_css_assets   @config.css_prefix
+        mount_image_assets @config.image_prefix
       end
 
       def setup_enviroment

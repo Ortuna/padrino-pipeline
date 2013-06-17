@@ -24,8 +24,8 @@ module Padrino
       end
 
       def setup_pipeline
-        js_prefix, css_prefix, image_prefix = self.js_prefix, self.css_prefix, self.image_prefix
-        js_assets, css_assets, image_assets = self.js_assets, self.css_assets, self.image_assets
+        js_prefix, css_prefix, image_prefix = @config.js_prefix, @config.css_prefix, @config.image_prefix
+        js_assets, css_assets, image_assets = @config.js_assets, @config.css_assets, @config.image_assets
         packages            = self.packages
         compression_enabled = serve_compressed?
 

@@ -23,6 +23,18 @@ module Padrino
         @app.settings.root
       end
 
+      def image_prefix
+        (prefix || '') + @image_prefix
+      end
+
+      def js_prefix
+        (prefix || '') + @js_prefix
+      end
+
+      def css_prefix
+        (prefix || '') + @css_prefix
+      end
+
     end
   end
 end
