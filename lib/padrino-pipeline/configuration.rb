@@ -7,11 +7,20 @@ module Padrino
       attr_accessor :css_assets, :js_assets, :image_assets
       attr_accessor :enable_compression
 
-      def initialize
-        @packages = []
+      def initialize(app)
+        @app          = app
+        @packages     = []
         @image_prefix = '/assets/images'
         @js_prefix    = '/assets/javascripts'
         @css_prefix   = '/assets/stylesheets'
+
+        @image_assets = "#{app_root}/assets/images"
+        @js_assets    = "#{app_root}/assets/javascripts"
+        @css_assets   = "#{app_root}/assets/stylesheets"
+      end
+
+      def app_root
+        @app.settings.root
       end
 
     end
