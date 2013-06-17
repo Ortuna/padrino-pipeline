@@ -1,6 +1,7 @@
 require 'padrino-pipeline/pipelines/sprockets'
 require 'padrino-pipeline/pipelines/asset_pack'
 require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
+require 'padrino-pipeline/configuration'
 require 'ostruct'
 
 module Padrino
@@ -9,8 +10,7 @@ module Padrino
   module Pipeline
 
     def configure_assets(&block)
-      assets = OpenStruct.new
-      assets.packages = []
+      assets = Padrino::Pipeline::Configuration.new
       yield assets if block_given?
       assets.pipeline.new(self, assets)
     end
