@@ -20,7 +20,7 @@ module Padrino
 
       private
       def setup_tasks
-        Padrino::Tasks.files.concat "#{File.dirname(__FILE__)}/../tasks/precompile_assetpack.rb"
+        Padrino::Tasks.files << "#{File.dirname(__FILE__)}/../tasks/precompile_assetpack.rb"
       end
 
       def setup_enviroment
