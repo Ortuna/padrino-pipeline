@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec 
 gem "rake"
-gem "nokogiri",  "~> 1.5.10"
+(RUBY_VERSION < "1.9") ? gem("nokogiri",  "~> 1.5.10") : gem("nokogiri",  "~> 1.6")
 
 group :test do
   gem "webrat",    ">= 0.5.1"
