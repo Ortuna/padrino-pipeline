@@ -4,7 +4,6 @@ require 'padrino-pipeline/pipelines/common'
 module Padrino
   module Pipeline
     class AssetPack
-      include Padrino::Pipeline::Common
 
       def initialize(app, config)
         @app    = app
@@ -27,7 +26,7 @@ module Padrino
         js_prefix, css_prefix, image_prefix = @config.js_prefix, @config.css_prefix, @config.image_prefix
         js_assets, css_assets, image_assets = @config.js_assets, @config.css_assets, @config.image_assets
         packages            = self.packages
-        compression_enabled = serve_compressed?
+        compression_enabled = @config.serve_compressed?
 
         @app.assets {
           def mount_asset(prefix, assets)

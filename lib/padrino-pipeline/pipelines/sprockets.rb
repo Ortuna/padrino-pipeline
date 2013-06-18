@@ -5,7 +5,6 @@ require 'padrino-pipeline/pipelines/common'
 module Padrino
   module Pipeline 
     class Sprockets
-      include Padrino::Pipeline::Common
 
       def initialize(app, config)
         @app       = app
@@ -16,9 +15,9 @@ module Padrino
 
       private
       def paths
-        js_assets    = self.js_assets.kind_of?(Array)    ? self.js_assets    : [self.js_assets]
-        css_assets   = self.css_assets.kind_of?(Array)   ? self.css_assets   : [self.css_assets]
-        image_assets = self.image_assets.kind_of?(Array) ? self.image_assets : [self.image_assets]
+        js_assets    = @config.js_assets.kind_of?(Array)    ? @config.js_assets    : [@config.js_assets]
+        css_assets   = @config.css_assets.kind_of?(Array)   ? @config.css_assets   : [@config.css_assets]
+        image_assets = @config.image_assets.kind_of?(Array) ? @config.image_assets : [@config.image_assets]
         js_assets + css_assets + image_assets
       end
 
@@ -32,7 +31,7 @@ module Padrino
       def setup_enviroment
         @app.set :serve_assets, true
         @app.set :assets, ::Sprockets::Environment.new
-        if serve_compressed?
+        if @config.serve_compressed?
           @app.settings.assets.js_compressor   = Uglifier.new(:mangle => true)
           @app.settings.assets.css_compressor  = :sass
         end
