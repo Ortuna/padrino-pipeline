@@ -1,5 +1,4 @@
 require 'sinatra/assetpack' unless defined? Sinatra::AssetPack
-require 'padrino-pipeline/pipelines/common'
 
 module Padrino
   module Pipeline

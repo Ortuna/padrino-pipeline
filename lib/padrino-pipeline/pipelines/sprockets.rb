@@ -1,6 +1,5 @@
 require 'sprockets'
 require 'uglifier'
-require 'padrino-pipeline/pipelines/common'
 
 module Padrino
   module Pipeline 
