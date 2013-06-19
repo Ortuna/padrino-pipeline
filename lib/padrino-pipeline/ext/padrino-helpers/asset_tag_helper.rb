@@ -4,12 +4,16 @@ module Padrino
   module Helpers
     module AssetTagHelpers
 
-      def pipeline_asset_path(kind, source)
-        original_asset_path(kind, source)
+      def pipeline_asset_folder_name(kind)
+        case kind
+        when :css then 'stylesheets'
+        when :js  then 'javascripts'
+        else kind.to_s
+        end
       end
 
-      alias_method :original_asset_path, :asset_path
-      alias_method :asset_path, :pipeline_asset_path
+      alias_method :original_asset_folder_name, :asset_folder_name
+      alias_method :asset_folder_name, :pipeline_asset_folder_name
 
     end #AssetTagHelpers
   end #Helpers
