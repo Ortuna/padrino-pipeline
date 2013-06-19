@@ -7,7 +7,7 @@ module Padrino
   ##
   # Add public api docs here
   module Pipeline
-
+    
     def configure_assets(&block)
       assets = Padrino::Pipeline::Configuration.new(self)
       yield assets if block_given?

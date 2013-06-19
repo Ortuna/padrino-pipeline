@@ -6,7 +6,6 @@ describe 'Asset tags' do
     let(:app) { rack_app }
 
     it 'can use the default javascript_include_tag to resolve JS asset' do
-      skip
       assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
       mock_app do
         register Padrino::Pipeline
@@ -19,7 +18,7 @@ describe 'Asset tags' do
       end
 
       get '/'
-      assert_equal '/assets/javascripts/app.js', last_response.body
+      assert_match '/assets/javascripts/app.js', last_response.body
     end
 
   end
