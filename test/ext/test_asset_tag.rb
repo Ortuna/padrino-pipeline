@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
 shared_examples_for 'A Pipeline' do
   describe 'Asset tags' do
 
-    context 'javascript_include_tag' do
+    context 'asset tags for #js #css #image' do
       let(:app) { rack_app }
       before :each do
         assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
@@ -15,8 +15,8 @@ shared_examples_for 'A Pipeline' do
             assets.pipeline  = pipeline
             assets.js_assets = [assets_location]
           end
-          get('/js') { render :erb, "<%= javascript_include_tag 'app.js' %>" }
-          get('/css') { render :erb, "<%= stylesheet_link_tag 'app.css' %>" }
+          get('/js')    { render :erb, "<%= javascript_include_tag 'app.js' %>" }
+          get('/css')   { render :erb, "<%= stylesheet_link_tag 'app.css' %>" }
           get('/image') { render :erb, "<%= image_tag 'image.png' %>" }
         end  
       end
