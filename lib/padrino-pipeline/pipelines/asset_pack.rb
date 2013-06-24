@@ -29,10 +29,10 @@ module Padrino
 
         @app.assets {
           def mount_asset(prefix, assets)
-            if assets.respond_to?(:each)
-              assets.each {|asset| serve prefix, :from => asset} 
-            else
-              serve prefix, :from => assets
+            # AssetPack needs assets path to be relative
+            [*assets].each do |asset|
+              asset.slice!("#{@app.root}/") if asset.start_with?("#{@app.root}/")
+              serve prefix, :from => asset
             end
           end
 
