@@ -1,10 +1,9 @@
-require 'sinatra/assetpack' unless defined? Sinatra::AssetPack
-
 module Padrino
   module Pipeline
     class AssetPack
 
       def initialize(app, config)
+        require_libraries
         @app    = app
         @config = config
         setup_enviroment
@@ -16,6 +15,10 @@ module Padrino
       end
 
       private
+      def require_libraries
+        require 'sinatra/assetpack'
+      end
+
       def setup_enviroment
         @app.set :serve_assets, true
         @app.register Sinatra::AssetPack

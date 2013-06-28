@@ -1,11 +1,9 @@
-require 'sprockets'
-require 'uglifier'
-
 module Padrino
   module Pipeline 
     class Sprockets
 
       def initialize(app, config)
+        require_libraries
         @app       = app
         @config    = config
         setup_enviroment
@@ -13,6 +11,10 @@ module Padrino
       end
 
       private
+      def require_libraries
+        %w[sprockets uglifier].each { |package| require package }
+      end
+
       def paths
         js_assets    = @config.js_assets.kind_of?(Array)    ? @config.js_assets    : [@config.js_assets]
         css_assets   = @config.css_assets.kind_of?(Array)   ? @config.css_assets   : [@config.css_assets]
