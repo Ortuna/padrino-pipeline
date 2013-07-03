@@ -49,7 +49,7 @@ module Padrino
       end
 
       def serve_compressed?
-        enable_compression || !(PADRINO_ENV == "development")
+        enable_compression || PADRINO_ENV == "production"
       end
 
       private
@@ -63,9 +63,7 @@ module Padrino
 
       def match_compiler
         pipeline_type  = pipeline_class.split('::').last
-        Kernel.const_get "Padrino::Pipeline::Compiler::#{pipeline_type}"
-      rescue
-        nil
+        "Padrino::Pipeline::Compiler::#{pipeline_type}".constantize
       end
     end
   end
