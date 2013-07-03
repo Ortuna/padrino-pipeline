@@ -5,7 +5,9 @@ module Padrino
       attr_accessor :pipeline,   :packages,  :prefix 
       attr_accessor :css_prefix, :js_prefix, :image_prefix 
       attr_accessor :css_assets, :js_assets, :image_assets
-      attr_accessor :enable_compression
+      attr_accessor :js_compiled_output, :css_compiled_output, :compiled_output
+      attr_accessor :js_compiled_asset,  :css_compiled_asset
+      attr_accessor :enable_compression, :app
 
       def initialize(app)
         @app          = app
@@ -17,6 +19,17 @@ module Padrino
         @image_assets = "#{app_root}/assets/images"
         @js_assets    = "#{app_root}/assets/javascripts"
         @css_assets   = "#{app_root}/assets/stylesheets"
+
+        @compiled_output     = "#{app_root}/public"
+        @js_compiled_output  = "javascripts"
+        @css_compiled_output = "stylesheets"
+
+        @js_compiled_asset  = 'application.js'
+        @css_compiled_asset = 'application.css'
+      end
+
+      def compile(*args)
+        asset_compiler.new(self).compile(*args)
       end
 
       def app_root
@@ -36,9 +49,24 @@ module Padrino
       end
 
       def serve_compressed?
-        enable_compression || PADRINO_ENV == "production"
+        enable_compression || !(PADRINO_ENV == "development")
       end
 
+      private
+      def asset_compiler
+        @asset_compiler || match_compiler
+      end
+
+      def pipeline_class 
+        @pipeline.class.name
+      end
+
+      def match_compiler
+        pipeline_type  = pipeline_class.split('::').last
+        Kernel.const_get "Padrino::Pipeline::Compiler::#{pipeline_type}"
+      rescue
+        nil
+      end
     end
   end
 end

@@ -5,11 +5,11 @@ module Padrino
     module AssetTagHelpers
 
       def pipeline_asset_folder_name(kind)
-        config = settings.pipeline_config
+        pipeline = settings.pipeline
         case kind
-        when :css    then config.css_prefix
-        when :js     then config.js_prefix
-        when :images then config.image_prefix
+        when :css    then pipeline.css_prefix
+        when :js     then pipeline.js_prefix
+        when :images then pipeline.image_prefix
         else kind.to_s
         end
       end
