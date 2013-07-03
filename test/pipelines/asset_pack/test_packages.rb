@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
 require File.expand_path(File.dirname(__FILE__) + '/../../fixtures/asset_pack_app/asset_pack_app')
 
-describe 'AssetPack Packages' do
+describe :asset_pack_packages do
 
-  context 'for CustomPackApp' do
+  context :custom_package do
     let(:app) { CustomPackagesApp }
 
     it 'can serve a js asset pack' do

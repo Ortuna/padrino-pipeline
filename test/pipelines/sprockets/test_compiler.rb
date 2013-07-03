@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
 require 'ostruct'
 
-describe 'Padrino::Pipeline::Compiler::Sprockets' do
+describe Padrino::Pipeline::Compiler::Sprockets do
   before do
     @asset_path   = "#{fixture_path('sprockets_app')}/assets"
     @public_path  = "#{fixture_path('sprockets_app')}/public"

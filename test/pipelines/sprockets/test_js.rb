@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
 require File.expand_path(File.dirname(__FILE__) + '/../../fixtures/sprockets_app/sprockets_app')
 
 
-describe 'Javascripts' do
+describe :sprockets_javascript do
   let(:app) { AssetsAppSprockets }
   context 'for //= require' do
     it 'picks up require statements' do
@@ -11,4 +11,4 @@ describe 'Javascripts' do
     end
   end
  
-end#describe
+end
