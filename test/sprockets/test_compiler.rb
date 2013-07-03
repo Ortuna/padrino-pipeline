@@ -39,6 +39,18 @@ describe 'Padrino::Pipeline::Compiler::Sprockets' do
     assert_equal true, File.exists?("#{@public_path}/javascripts-compiled")
   end
 
+  it 'creates the correct directory for stylesheets' do
+    config_hash = { compiled_output: @public_path,  css_compiled_output: 'stylesheets' }
+    config   = OpenStruct.new(config_hash)
+    compiler = Padrino::Pipeline::Compiler::Sprockets.new(config).compile(:css)
+    assert_equal true, File.exists?("#{@public_path}/stylesheets")
+
+    config_hash = { compiled_output: @public_path,  css_compiled_output: 'stylesheets-compiled' }
+    config   = OpenStruct.new(config_hash)
+    compiler = Padrino::Pipeline::Compiler::Sprockets.new(config).compile(:js)
+    assert_equal true, File.exists?("#{@public_path}/stylesheets-compiled")
+  end  
+
   describe 'Custom compiler settings' do
     let(:app) { rack_app }
     before do 
