@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
-require File.expand_path(File.dirname(__FILE__) + '/../fixtures/asset_pack_app/asset_pack_app')
+require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../fixtures/asset_pack_app/asset_pack_app')
 
 describe 'AssetPack Packages' do
 

@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/helpers/helper')
 
-shared_examples_for 'A Pipeline' do
+shared_examples_for :pipeline do
   describe 'default options' do
     let(:app) { rack_app }
     before do
@@ -100,12 +100,12 @@ end
 
 describe Padrino::Pipeline::Sprockets do
   before { @pipeline = Padrino::Pipeline::Sprockets }
-  it_behaves_like 'A Pipeline'
+  it_behaves_like :pipeline
 end
 
 describe Padrino::Pipeline::AssetPack do
   before { @pipeline = Padrino::Pipeline::AssetPack}
-  it_behaves_like 'A Pipeline'
+  it_behaves_like  :pipeline
 end
 
 

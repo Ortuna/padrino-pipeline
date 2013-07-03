@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
 require 'ostruct'
 
 describe 'Padrino::Pipeline::Compiler::Sprockets' do

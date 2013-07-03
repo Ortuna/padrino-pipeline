@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/../extra/helper')
+require File.expand_path(File.dirname(__FILE__) + '/helpers/helper')
 
-shared_examples_for 'A Pipeline' do
-  describe 'compression' do
+shared_examples_for :pipeline do
+  describe :asset_compression do
     let(:app) { rack_app }
     before do
       assets_location =  "#{fixture_path('asset_pack_app')}/assets/"
@@ -31,10 +31,10 @@ end
   
 describe Padrino::Pipeline::Sprockets do
   before { @pipeline = Padrino::Pipeline::Sprockets }
-  it_behaves_like 'A Pipeline'
+  it_behaves_like :pipeline
 end
 
 describe Padrino::Pipeline::AssetPack do
   before { @pipeline = Padrino::Pipeline::AssetPack}
-  it_behaves_like 'A Pipeline'
+  it_behaves_like :pipeline
 end
