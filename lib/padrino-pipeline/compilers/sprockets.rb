@@ -26,7 +26,7 @@ module Padrino
         def css_output_path(file_name = '')
           output_path(@config.css_compiled_output).join(file_name)
         end
-        
+
         private
         def assets
           @config.app.assets
@@ -37,15 +37,19 @@ module Padrino
         end
 
         def compile_css
-          asset  = assets[@config.css_compiled_asset]
-          asset.write_to css_output_path("application-#{asset.digest}.css")
-          asset.write_to css_output_path("application-#{asset.digest}.css.gz")
+          compile_assets(:css, ['css', 'css.gz'])
         end
 
         def compile_js
-          asset  = assets[@config.js_compiled_asset]
-          asset.write_to js_output_path("application-#{asset.digest}.js")
-          asset.write_to js_output_path("application-#{asset.digest}.js.gz")
+          compile_assets(:js, ['js', 'js.gz'])
+        end
+
+        def compile_assets(type, extensions = [])
+          asset  = assets[@config.send("#{type.to_s}_compiled_asset")]
+          extensions.each do |ext|
+            output_path = self.send("#{type.to_s}_output_path", "application-#{asset.digest}.#{ext}")
+            asset.write_to output_path
+          end
         end
 
         def create_directory(path)
