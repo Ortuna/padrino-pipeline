@@ -29,7 +29,7 @@ module Padrino
       end
 
       def compile(*args)
-        asset_compiler.new(self).compile(*args)
+        asset_compiler.compile(*args)
       end
 
       def app_root
@@ -51,12 +51,12 @@ module Padrino
       def serve_compressed?
         enable_compression || PADRINO_ENV == "production"
       end
-
-      private
+      
       def asset_compiler
-        @asset_compiler || match_compiler
+        @asset_compiler ||= match_compiler.new(self)
       end
 
+      private
       def pipeline_class 
         @pipeline.class.name
       end

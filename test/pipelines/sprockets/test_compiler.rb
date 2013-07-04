@@ -57,26 +57,38 @@ describe Padrino::Pipeline::Compiler::Sprockets do
       asset_path, public_path = @asset_path, @public_path
       mock_app do
         register Padrino::Pipeline
+        register Padrino::Helpers
+
         configure_assets do |assets|
           assets.pipeline        = Padrino::Pipeline::Sprockets
           assets.js_assets       = "#{asset_path}/javascripts"
           assets.css_assets      = "#{asset_path}/stylesheets"
           assets.compiled_output = "#{public_path}"
         end
+
+        get('/js') { render :erb, "<%= javascript_include_tag 'application.js' %>" }
       end
     end
 
-    after do 
-      FileUtils.rm_rf "#{@public_path}/javascripts"
+    after { FileUtils.rm_rf "#{@public_path}/javascripts" }
+
+    context 'asset_tags' do
+      it 'should return javascript with the correct digest' do
+        @app.pipeline.compile :js
+
+        digest = @app.assets['application.js'].digest
+        get '/js'
+        assert_match "application-#{digest}.js", last_response.body
+      end
     end
-    describe 'javascripts' do
+
+    context 'javascripts' do
       it 'should compile application.js and application.js.gz' do
         @app.pipeline.compile :js
 
         digest = @app.assets['application.js'].digest
         assert_equal true, File.exists?("#{@public_path}/javascripts/application-#{digest}.js")
         assert_equal true, File.exists?("#{@public_path}/javascripts/application-#{digest}.js.gz")
-        
       end
 
       it 'should compile files included in the manifest' do
@@ -88,14 +100,13 @@ describe Padrino::Pipeline::Compiler::Sprockets do
       end
     end
 
-    describe 'stylesheets' do
+    context 'stylesheets' do
       it 'should compile application.css and application.css.gz' do
         @app.pipeline.compile :css
 
         digest = @app.assets['application.css'].digest
         assert_equal true, File.exists?("#{@public_path}/stylesheets/application-#{digest}.css")
         assert_equal true, File.exists?("#{@public_path}/stylesheets/application-#{digest}.css.gz")
-        
       end
 
       it 'should compile files included in the manifest' do

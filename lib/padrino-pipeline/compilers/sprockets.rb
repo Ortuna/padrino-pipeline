@@ -19,6 +19,14 @@ module Padrino
           end
         end
 
+        def js_output_path(file_name = '')
+          output_path(@config.js_compiled_output).join(file_name)
+        end
+
+        def css_output_path(file_name = '')
+          output_path(@config.css_compiled_output).join(file_name)
+        end
+        
         private
         def assets
           @config.app.assets
@@ -26,14 +34,6 @@ module Padrino
 
         def output_path(directory_name)
           output_path = Pathname.new(@config.compiled_output).join(directory_name)
-        end
-
-        def js_output_path(file_name = '')
-          output_path(@config.js_compiled_output).join(file_name)
-        end
-
-        def css_output_path(file_name = '')
-          output_path(@config.css_compiled_output).join(file_name)
         end
 
         def compile_css
