@@ -60,7 +60,7 @@ describe Padrino::Pipeline::Compiler::Sprockets do
         configure_assets do |assets|
           assets.pipeline        = Padrino::Pipeline::Sprockets
           assets.js_assets       = "#{asset_path}/javascripts"
-          assets.css_assets       = "#{asset_path}/stylesheets"
+          assets.css_assets      = "#{asset_path}/stylesheets"
           assets.compiled_output = "#{public_path}"
         end
       end
