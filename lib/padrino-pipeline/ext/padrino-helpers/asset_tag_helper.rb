@@ -26,18 +26,33 @@ module Padrino
         }.join("\n").html_safe
       end
 
+      alias_method :original_stylesheet_link_tag, :stylesheet_link_tag
+      def stylesheet_link_tag(*sources)
+        options = sources.extract_options!.symbolize_keys
+        options.reverse_merge!(:media => 'screen', :rel => 'stylesheet', :type => 'text/css')
+        sources.flatten.map { |source|
+          tag(:link, options.reverse_merge(:href => asset_path(:css, resolve_css_path(source))))
+        }.join("\n").html_safe
+      end
+
       private
+      def resolve_css_path(source)
+        digested_source       = digested_source(source)
+        digested_source_path  = digested_source_path(:css, digested_source)
+        File.exists?(digested_source_path) ? asset_path(:css, digested_source) : asset_path(:css, source)
+      end
+
       def resolve_js_path(source)
         digested_source       = digested_source(source)
-        digested_source_path  = digested_source_path(digested_source)
+        digested_source_path  = digested_source_path(:js, digested_source)
         File.exists?(digested_source_path) ? asset_path(:js, digested_source) : asset_path(:js, source)
       end
 
       ##
       # Get the full path of the digested_source
-      def digested_source_path(digested_source)
+      def digested_source_path(type, digested_source)
         #hackzor
-        settings.pipeline.asset_compiler.js_output_path(digested_source)
+        settings.pipeline.asset_compiler.send("#{type.to_s}_output_path", digested_source)
       rescue
         ''
       end
@@ -56,7 +71,7 @@ module Padrino
         return '' unless defined? settings
         return '' unless settings.respond_to?(:assets)
         return '' unless settings.assets.respond_to?(:[])
-        settings.assets[source].digest
+        settings.assets[source] && settings.assets[source].digest
       end
 
     end #AssetTagHelpers

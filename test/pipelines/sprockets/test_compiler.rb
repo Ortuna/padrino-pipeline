@@ -67,6 +67,7 @@ describe Padrino::Pipeline::Compiler::Sprockets do
         end
 
         get('/js') { render :erb, "<%= javascript_include_tag 'application.js' %>" }
+        get('/css') { render :erb, "<%= stylesheet_link_tag 'application.css' %>" }
       end
     end
 
@@ -78,7 +79,14 @@ describe Padrino::Pipeline::Compiler::Sprockets do
 
         digest = @app.assets['application.js'].digest
         get '/js'
-        assert_match "application-#{digest}.js", last_response.body
+        assert_match "/assets/javascripts/application-#{digest}.js", last_response.body
+      end
+
+      it 'should return stylesheet with the correct digest' do
+        @app.pipeline.compile :css
+        digest = @app.assets['application.css'].digest
+        get '/css'
+        assert_match "/assets/stylesheets/application-#{digest}.css", last_response.body
       end
     end
 
