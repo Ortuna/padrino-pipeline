@@ -70,35 +70,40 @@ describe Padrino::Pipeline::Compiler::Sprockets do
       FileUtils.rm_rf "#{@public_path}/javascripts"
     end
     describe 'javascripts' do
-      it 'should compile application.min.js and application.min.js.gz' do
+      it 'should compile application.js and application.js.gz' do
         @app.pipeline.compile :js
 
-        assert_equal true, File.exists?("#{@public_path}/javascripts/application.min.js")
-        assert_equal true, File.exists?("#{@public_path}/javascripts/application.min.js.gz")
+        digest = @app.assets['application.js'].digest
+        assert_equal true, File.exists?("#{@public_path}/javascripts/application-#{digest}.js")
+        assert_equal true, File.exists?("#{@public_path}/javascripts/application-#{digest}.js.gz")
         
       end
 
       it 'should compile files included in the manifest' do
         @app.pipeline.compile :js
-        assert_match_in_file 'function in_second_file()', "#{@public_path}/javascripts/application.min.js"
-        assert_match_in_file 'coffee_method', "#{@public_path}/javascripts/application.min.js"
+
+        digest = @app.assets['application.js'].digest
+        assert_match_in_file 'function in_second_file()', "#{@public_path}/javascripts/application-#{digest}.js"
+        assert_match_in_file 'coffee_method', "#{@public_path}/javascripts/application-#{digest}.js"
       end
     end
 
     describe 'stylesheets' do
-      it 'should compile application.min.css and application.min.css.gz' do
+      it 'should compile application.css and application.css.gz' do
         @app.pipeline.compile :css
 
-        assert_equal true, File.exists?("#{@public_path}/stylesheets/application.min.css")
-        assert_equal true, File.exists?("#{@public_path}/stylesheets/application.min.css.gz")
+        digest = @app.assets['application.css'].digest
+        assert_equal true, File.exists?("#{@public_path}/stylesheets/application-#{digest}.css")
+        assert_equal true, File.exists?("#{@public_path}/stylesheets/application-#{digest}.css.gz")
         
       end
 
       it 'should compile files included in the manifest' do
         @app.pipeline.compile :css
 
-        assert_match_in_file '.home', "#{@public_path}/stylesheets/application.min.css"
-        assert_match_in_file '.div', "#{@public_path}/stylesheets/application.min.css"
+        digest = @app.assets['application.css'].digest
+        assert_match_in_file '.home', "#{@public_path}/stylesheets/application-#{digest}.css"
+        assert_match_in_file '.div', "#{@public_path}/stylesheets/application-#{digest}.css"
       end
     end
   end

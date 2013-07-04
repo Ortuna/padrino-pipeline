@@ -38,14 +38,14 @@ module Padrino
 
         def compile_css
           asset  = assets[@config.css_compiled_asset]
-          asset.write_to css_output_path('application.min.css')
-          asset.write_to css_output_path('application.min.css.gz')
+          asset.write_to css_output_path("application-#{asset.digest}.css")
+          asset.write_to css_output_path("application-#{asset.digest}.css.gz")
         end
 
         def compile_js
           asset  = assets[@config.js_compiled_asset]
-          asset.write_to js_output_path('application.min.js')
-          asset.write_to js_output_path('application.min.js.gz')
+          asset.write_to js_output_path("application-#{asset.digest}.js")
+          asset.write_to js_output_path("application-#{asset.digest}.js.gz")
         end
 
         def create_directory(path)
