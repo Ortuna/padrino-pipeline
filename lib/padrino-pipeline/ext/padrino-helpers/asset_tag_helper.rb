@@ -37,15 +37,17 @@ module Padrino
 
       private
       def resolve_css_path(source)
-        digested_source       = digested_source(source)
-        digested_source_path  = digested_source_path(:css, digested_source)
-        File.exists?(digested_source_path) ? asset_path(:css, digested_source) : asset_path(:css, source)
+        resolve_path(:css, source)
       end
 
       def resolve_js_path(source)
+        resolve_path(:js, source)
+      end
+
+      def resolve_path(type, source)
         digested_source       = digested_source(source)
-        digested_source_path  = digested_source_path(:js, digested_source)
-        File.exists?(digested_source_path) ? asset_path(:js, digested_source) : asset_path(:js, source)
+        digested_source_path  = digested_source_path(type, digested_source)
+        File.exists?(digested_source_path) ? asset_path(type, digested_source) : asset_path(type, source)
       end
 
       ##
