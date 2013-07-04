@@ -62,9 +62,8 @@ module Example
 end
 ```
 
-The following options can be set
 
-### Pipeline
+## Pipeline
 ```ruby
 module Example
   class App < Padrino::Application
@@ -79,9 +78,9 @@ end
 `config.pipeline = Padrino::Pipeline::AssetPack`
 `config.pipeline = Padrino::Pipeline::Sprockets`
 
-### Assets URI(mounting location) String
+## Assets URI(mounting location) String
 
-##css_prefix
+###css_prefix
 ```ruby
 module Example
   class App < Padrino::Application
@@ -93,10 +92,10 @@ module Example
   end
 end
 ```
-/my_custom_location will be the location css assets are served 
-e.g. /my_custom_location/application.css
+`/my_custom_location` will be the location css assets are served 
+e.g. `/my_custom_location/application.css`
 
-##js_prefix
+###js_prefix
 ```ruby
 module Example
   class App < Padrino::Application
@@ -108,11 +107,11 @@ module Example
   end
 end
 ```
-/js will be the location css assets are served 
-e.g. /js/application.js
+`/js` will be the location css assets are served 
+e.g. `/js/application.js`
 
-### Asset location(path to files) String/Array
-##css_assets
+## Asset location(path to files) String/Array
+###css_assets
 ```ruby
 module Example
   class App < Padrino::Application
@@ -124,9 +123,9 @@ module Example
   end
 end
 ```
-/path/to/stylesheets will be served at the css_prefix(default: /assets/stylesheets)
+`/path/to/stylesheets` will be served at the css_prefix(default: /assets/stylesheets)
 
-##js_assets
+###js_assets
 ```ruby
 module Example
   class App < Padrino::Application
@@ -138,10 +137,10 @@ module Example
   end
 end
 ```
-/path/to/javascripts will be served at the css_prefix(default: /assets/javascripts)
+`/path/to/javascripts` will be served at the js_prefix(default: /assets/javascripts)
 
-### Prefix prepend this prefix before all assets
-##prefix
+## Prefix prepend this prefix before all assets
+###prefix
 ```ruby
 module Example
   class App < Padrino::Application
@@ -154,10 +153,12 @@ module Example
 end
 ```
 prefixes `/public` to all asset URLs.  Above example will serve assets from:
-- /public/assets/stylesheets/application.css # => http://localhost:3000/public/assets/stylesheets/application.css
-- /public/assets/javascripts/application.js # => http://localhost:3000/public/assets/javascripts/application.js
+- `/public/assets/stylesheets/application.css` 
+  # => `http://localhost:3000/public/assets/stylesheets/application.css`
+- `/public/assets/javascripts/application.js` 
+  # => `http://localhost:3000/public/assets/javascripts/application.js`
 
-### Default option values
+## Default option values
 TODO
 
 ## compile asset rake tasks
