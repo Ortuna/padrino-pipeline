@@ -51,6 +51,8 @@ describe Padrino::Pipeline::Compiler::Sprockets do
     assert_equal true, File.exists?("#{@public_path}/stylesheets-compiled")
   end  
 
+  it 'cleans'
+
   describe 'Custom compiler settings' do
     let(:app) { rack_app }
     before do 
