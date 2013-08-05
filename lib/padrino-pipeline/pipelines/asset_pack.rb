@@ -32,20 +32,18 @@ module Padrino
 
         @app.assets {
           def mount_asset(prefix, assets)
-            # AssetPack needs assets path to be relative
-            [*assets].each do |asset|
-              asset.slice!("#{@app.root}/") if asset.start_with?("#{@app.root}/")
-              serve prefix, :from => asset
+            [*assets].flatten.each do |asset|
+              serve(prefix, :from => asset) if File.exists? asset
             end
           end
 
-          mount_asset js_prefix,    js_assets
-          mount_asset css_prefix,   css_assets
-          mount_asset image_prefix, image_assets
+          mount_asset(js_prefix,    js_assets)
+          mount_asset(css_prefix,   css_assets)
+          mount_asset(image_prefix, image_assets)
 
           packages.each { |package| send(package.shift, *package) }
           if compression_enabled
-            js_compression  :uglify
+            js_compression  :jsmin
             css_compression :sass
           end
         }

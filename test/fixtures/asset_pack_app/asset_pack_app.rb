@@ -29,14 +29,15 @@ class AssetsAppAssetPackCustom < BaseApp
   end
 end
 
-class CustomPackagesApp < BaseApp
+class CustomPackagesAppDev < BaseApp
   configure_assets do |config|
     config.pipeline   = Padrino::Pipeline::AssetPack
     
-    config.packages << [:js, :application, '/assets/javascripts/application.js', ['/assets/javascripts/*.js']]
-    config.packages << [:css, :application, '/assets/stylesheets/application.css', ['/assets/stylesheets/*.css']]
+    config.packages << [:js, :application, '/assets/javascripts/application.js', ['/assets/javascripts/*']]
+    config.packages << [:css, :application, '/assets/stylesheets/application.css', ['/assets/stylesheets/*']]
 
   end
 
 end
+
 Padrino.load!
