@@ -1,3 +1,5 @@
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..','lib'))
 require 'rack/test'
 require 'padrino-helpers'
 require File.expand_path(File.dirname(__FILE__) + '/mini_shoulda')
