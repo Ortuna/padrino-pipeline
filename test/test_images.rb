@@ -6,7 +6,9 @@ shared_examples_for :pipeline do
     before do
       pipeline = @pipeline
       app_root = fixture_path('sprockets_app')
-      mock_app do
+      base     = Padrino::Application
+      base     = Sinatra::Base if @pipeline == Padrino::Pipeline::AssetPack
+      mock_app(base) do
         set :root, app_root
         register Padrino::Pipeline
         configure_assets{ |c| c.pipeline = pipeline }
@@ -25,7 +27,6 @@ shared_examples_for :pipeline do
     end
 
     it 'gives 404 for unkown image files' do
-      skip if @pipeline == Padrino::Pipeline::AssetPack #http_router issue :(
       get '/assets/images/unkown.png'
       assert_equal 404, last_response.status
     end
