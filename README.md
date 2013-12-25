@@ -1,17 +1,18 @@
-#Padrino Pipeline
-Padrino Pipeline is a gem for [Padrino](http://www.padrinorb.com).  It provides 
-a unified way to use several different asset management systems.
+# Padrino Pipeline
+
+Padrino Pipeline is a gem for [Padrino](http://www.padrinorb.com). It provides a unified way to use several different asset management systems.
 
 [![Build Status](https://travis-ci.org/Ortuna/padrino-pipeline.png?branch=master)](https://travis-ci.org/Ortuna/padrino-pipeline)
 [![Code Climate](https://codeclimate.com/github/Ortuna/padrino-pipeline.png)](https://codeclimate.com/github/Ortuna/padrino-pipeline)
 [![Dependency Status](https://gemnasium.com/Ortuna/padrino-pipeline.png)](https://gemnasium.com/Ortuna/padrino-pipeline)
 
 
-##Supported Pipelines
+## Supported Pipelines
+
 - [sprockets](https://github.com/sstephenson/sprockets)
 - [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack)
 
-##Simple Usage
+## Simple Usage
 
 ### Gemfile
 Add to your Gemfile:
@@ -92,7 +93,7 @@ module Example
   end
 end
 ```
-`/my_custom_location` will be the location css assets are served 
+`/my_custom_location` will be the location css assets are served
 e.g. `/my_custom_location/application.css`
 
 ###js_prefix
@@ -107,7 +108,7 @@ module Example
   end
 end
 ```
-`/js` will be the location css assets are served 
+`/js` will be the location css assets are served
 e.g. `/js/application.js`
 
 ## Asset location(path to files) String/Array
@@ -153,23 +154,26 @@ module Example
 end
 ```
 prefixes `/public` to all asset URLs.  Above example will serve assets from:
-- `/public/assets/stylesheets/application.css` 
+- `/public/assets/stylesheets/application.css`
   # => `http://localhost:3000/public/assets/stylesheets/application.css`
-- `/public/assets/javascripts/application.js` 
+- `/public/assets/javascripts/application.js`
   # => `http://localhost:3000/public/assets/javascripts/application.js`
 
 ## Default option values
+
 TODO
 
 ## compile asset rake tasks
 TODO
 
 ## Sprocket compiled assets
-`javascript_include_tag` & `stylesheet_link_tag` have been patched to include the hex digest of compiled assets.
+
+`javascript_include_tag` &amp; `stylesheet_link_tag` have been patched to include the hex digest of compiled assets.
 if the assets do not exist a fresh copy will be served via the normal asset URL.
 e.g. `application-12abc456xyz.js` vs `application.js`
 
 ## Asset pack packages
+
 ```ruby
   module Example
     class App < Padrino::Application
@@ -181,7 +185,9 @@ e.g. `application-12abc456xyz.js` vs `application.js`
     end
   end
 ```
+
 Will serve /assets/javascripts/application.js as a bundle
 
 ## Sprocket directive require/include/require tree
+
 TODO
