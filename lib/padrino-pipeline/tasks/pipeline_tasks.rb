@@ -10,6 +10,12 @@ namespace :pipeline do
     end
   end
 
+  desc "Compile all assets"
+  tast :compile => [:compile_js, :compile_css]
+
+  desc "Clean all assets"
+  tast :clean => [:clean_js, :clean_css]
+
   desc "Compile javascript assets"
   task :compile_js do
     load_apps
