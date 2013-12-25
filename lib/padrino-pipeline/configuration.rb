@@ -32,6 +32,10 @@ module Padrino
         asset_compiler.compile(*args)
       end
 
+      def clean(*args)
+        asset_compiler.clean(*args)
+      end
+
       def app_root
         @app.settings.root
       end

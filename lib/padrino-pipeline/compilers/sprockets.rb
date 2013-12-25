@@ -1,5 +1,5 @@
 module Padrino
-  module Pipeline 
+  module Pipeline
     module Compiler
       class Sprockets
         def initialize(config)
@@ -14,7 +14,16 @@ module Padrino
           case type
           when :js  then compile_js
           when :css then compile_css
-          else 
+          else
+            throw RuntimeError, "Can not compile #{type} asset"
+          end
+        end
+
+        def clean(type)
+          case type
+          when :js  then clean_js
+          when :css then clean_css
+          else
             throw RuntimeError, "Can not compile #{type} asset"
           end
         end
@@ -44,16 +53,30 @@ module Padrino
           compile_assets(:js, ['js', 'js.gz'])
         end
 
+        def clean_css
+          clean_assets(:css, ['css', 'css.gz'])
+        end
+
+        def clean_js
+          clean_assets(:js, ['js', 'js.gz'])
+        end
+
         def compile_assets(type, extensions = [])
-          asset  = assets[@config.send("#{type.to_s}_compiled_asset")]
+          asset = assets[@config.send("#{type.to_s}_compiled_asset")]
           extensions.each do |ext|
             output_path = self.send("#{type.to_s}_output_path", "application-#{asset.digest}.#{ext}")
             asset.write_to output_path
           end
         end
 
+        def clean_assets(type, extensions = [])
+          extensions.each do |ext|
+            FileUtils.rm Dir.glob(self.send("#{type.to_s}_output_path") + "application-*.#{ext}")
+          end
+        end
+
         def create_directory(path)
-          FileUtils.mkdir_p(path) unless File.exists?(path)
+          FileUtils.mkdir_p(path)
         end
       end
     end
