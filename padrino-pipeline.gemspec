@@ -29,6 +29,6 @@ Gem::Specification.new do |s|
   s.add_dependency("sass", "~> 3.2.0")
   s.add_dependency("uglifier", "~> 2.1.0")
   
-  s.add_dependency("sprockets", "~> 2.10.0")
-  s.add_dependency("sinatra-assetpack", "~> 0.3.0")
+  s.add_dependency("sprockets", "~> 2.10")
+  s.add_dependency("sinatra-assetpack", "~> 0.3")
 end
