@@ -164,7 +164,8 @@ prefixes `/public` to all asset URLs.  Above example will serve assets from:
 TODO
 
 ## compile asset rake tasks
-TODO
+
+Add `require 'padrino-pipeline/tasks'` to your Rakefile.
 
 ## Sprocket compiled assets
 
