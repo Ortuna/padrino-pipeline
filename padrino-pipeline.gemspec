@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency("padrino-helpers", ">= 0.11")
   s.add_dependency("coffee-script", "~> 2.2.0")
   s.add_dependency("sass", "~> 3.2.0")
-  s.add_dependency("uglifier", "~> 2.1.0")
+  s.add_dependency("uglifier", "~> 2.1")
   
   s.add_dependency("sprockets", "~> 2.11")
   s.add_dependency("sinatra-assetpack", "~> 0.3.0")
