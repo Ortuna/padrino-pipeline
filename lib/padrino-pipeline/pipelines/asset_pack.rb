@@ -30,7 +30,7 @@ module Padrino
         packages            = self.packages
         compression_enabled = @config.serve_compressed?
 
-        @app.assets {
+        @app.assets do
           def mount_asset(prefix, assets)
             [*assets].flatten.each do |asset|
               serve(prefix, :from => asset) if File.exists? asset
@@ -46,8 +46,9 @@ module Padrino
             js_compression  :jsmin
             css_compression :sass
           end
-        }
+        end 
       end
+
     end
   end
 end

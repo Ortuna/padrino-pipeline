@@ -41,4 +41,4 @@ class ColoredIO
   end
 end
 
-MiniTest::Unit.output = ColoredIO.new(MiniTest::Unit.output)
+#MiniTest::Unit.output = ColoredIO.new(MiniTest::Unit.output)

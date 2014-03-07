@@ -7,7 +7,6 @@ shared_examples_for :pipeline do
       let(:app) { rack_app }
       before :each do
         assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
-        public_path     = "#{fixture_path('sprockets_app')}/public"
         pipeline = @pipeline
         mock_app do
           register Padrino::Pipeline
