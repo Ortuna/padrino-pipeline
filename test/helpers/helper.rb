@@ -1,7 +1,9 @@
 $:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 $:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..','lib'))
+
 require 'rack/test'
 require 'padrino-helpers'
+require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
 require File.expand_path(File.dirname(__FILE__) + '/mini_shoulda')
 require File.expand_path(File.dirname(__FILE__) + '/../fixtures/sprockets_app/sprockets_app')
 

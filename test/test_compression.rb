@@ -4,7 +4,7 @@ shared_examples_for :pipeline do
   describe :asset_compression do
     let(:app) { rack_app }
     before do
-      assets_location =  "#{fixture_path('asset_pack_app')}/assets/"
+      assets_location = "#{fixture_path('asset_pack_app')}/assets/"
       pipeline        = @pipeline
       mock_app do
         register Padrino::Pipeline
@@ -28,6 +28,52 @@ shared_examples_for :pipeline do
 
   end
 end
+
+describe :default_compression do
+  before do
+    class SomeApp < Padrino::Application; end
+    @config = Padrino::Pipeline::Configuration.new(SomeApp)
+
+    @warn_level = $VERBOSE
+    $VERBOSE    = nil
+
+    reset_consts
+  end
+
+  after do
+    $VERBOSE = @warn_level
+  end
+
+  def reset_consts
+    Object.send(:remove_const, :PADRINO_ENV) if defined? PADRINO_ENV
+    Object.send(:remove_const, :RACK_ENV) if defined? RACK_ENV
+  end
+
+  def in_env(env)
+    %w(PADRINO_ENV RAKE_ENV).each do |const|
+      Object.const_set(const, env)
+      yield
+    end
+  end
+
+  it 'serve_compressed? is false for test' do
+    in_env "test" do
+      refute @config.serve_compressed? 
+    end
+  end
+
+  it 'serve_compressed? is false for development' do
+    in_env "development" do
+      refute @config.serve_compressed? 
+    end
+  end
+
+  it 'serve_compressed? is true for production' do
+    in_env "production" do
+      assert @config.serve_compressed? 
+    end
+  end
+end
   
 describe Padrino::Pipeline::Sprockets do
   before { @pipeline = Padrino::Pipeline::Sprockets }
@@ -35,6 +81,6 @@ describe Padrino::Pipeline::Sprockets do
 end
 
 describe Padrino::Pipeline::AssetPack do
-  before { @pipeline = Padrino::Pipeline::AssetPack}
-  it_behaves_like :pipeline
+  before { @pipeline = Padrino::Pipeline::AssetPack }
+  it_behaves_like :pipeline 
 end

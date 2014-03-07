@@ -4,6 +4,7 @@ require 'padrino-pipeline/compilers/sprockets'
 require 'padrino-pipeline/compilers/asset_pack'
 
 require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
+require 'padrino-pipeline/ext/asset-pack/helpers.rb'
 require 'padrino-pipeline/configuration'
 
 module Padrino

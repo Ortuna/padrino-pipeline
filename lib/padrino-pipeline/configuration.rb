@@ -53,7 +53,8 @@ module Padrino
       end
 
       def serve_compressed?
-        enable_compression || PADRINO_ENV == "production"
+        env = (defined?(PADRINO_ENV) && PADRINO_ENV) || (defined?(RAKE_ENV) && RAKE_ENV)
+        enable_compression || env == "production"
       end
       
       def asset_compiler
