@@ -126,10 +126,6 @@ describe Padrino::Pipeline::Compiler::Sprockets do
         assert_match_in_file '.div', "#{@public_path}/stylesheets/application-#{digest}.css"
       end
 
-      it 'finds the example bootstrap gems assets' do
-        get '/assets/stylesheets/boot.css'
-        assert_match "normalize\.css", last_response.body
-      end
     end
   end
 end
