@@ -36,6 +36,11 @@ module Padrino
           @app.settings.assets.js_compressor   = Uglifier.new(:mangle => true)
           @app.settings.assets.css_compressor  = :sass
         end
+        @app.settings.assets.context_class.class_eval do
+          def asset_path(path, options = {})
+            path
+          end
+        end 
       end
 
       def mount_image_assets(prefix)

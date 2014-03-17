@@ -1,5 +1,30 @@
 require File.expand_path(File.dirname(__FILE__) + '/helpers/helper')
 
+def reset_consts
+  Object.send(:remove_const, :PADRINO_ENV) if defined? PADRINO_ENV
+  Object.send(:remove_const, :RACK_ENV) if defined? RACK_ENV
+end
+
+def silence_warnings
+  @warn_level = $VERBOSE
+  $VERBOSE    = nil
+end
+
+def unsilence_warnings
+  $VERBOSE = @warn_level
+end
+
+def in_env(env)
+  silence_warnings
+  reset_consts
+  %w(PADRINO_ENV RAKE_ENV).each do |const|
+    Object.const_set(const, env)
+    yield
+  end
+  unsilence_warnings
+end
+
+
 shared_examples_for :pipeline do
   describe :asset_compression do
     let(:app) { rack_app }
@@ -17,13 +42,17 @@ shared_examples_for :pipeline do
     end
 
     it 'should not compress css in development mode' do
-      get '/assets/stylesheets/app.css'
-      assert_match "body {\n", last_response.body
+      in_env "development" do
+        get '/assets/stylesheets/app.css'
+        assert_match "body {\n", last_response.body
+      end
     end
 
     it 'should not compress js in development mode' do
-      get '/assets/javascripts/app.js'
-      assert_match "function test() {\n", last_response.body
+      in_env "development" do
+        get '/assets/javascripts/app.js'
+        assert_match "function test() {\n", last_response.body
+      end
     end
 
   end
@@ -33,27 +62,6 @@ describe :default_compression do
   before do
     class SomeApp < Padrino::Application; end
     @config = Padrino::Pipeline::Configuration.new(SomeApp)
-
-    @warn_level = $VERBOSE
-    $VERBOSE    = nil
-
-    reset_consts
-  end
-
-  after do
-    $VERBOSE = @warn_level
-  end
-
-  def reset_consts
-    Object.send(:remove_const, :PADRINO_ENV) if defined? PADRINO_ENV
-    Object.send(:remove_const, :RACK_ENV) if defined? RACK_ENV
-  end
-
-  def in_env(env)
-    %w(PADRINO_ENV RAKE_ENV).each do |const|
-      Object.const_set(const, env)
-      yield
-    end
   end
 
   it 'serve_compressed? is false for test' do
