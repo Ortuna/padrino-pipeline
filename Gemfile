@@ -7,4 +7,5 @@ gem "rake"
 group :test do
   gem "rack-test", ">= 0.5.0"
   gem "minitest",  "~> 4.0"
+  gem "bootstrap-sass", "~> 3.1"
 end
