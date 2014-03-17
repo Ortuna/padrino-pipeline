@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../helpers/helper')
 require 'ostruct'
+require 'bootstrap-sass'
 
 describe Padrino::Pipeline::Compiler::Sprockets do
   before do
@@ -50,8 +51,6 @@ describe Padrino::Pipeline::Compiler::Sprockets do
     compiler = Padrino::Pipeline::Compiler::Sprockets.new(config).compile(:js)
     assert_equal true, File.exists?("#{@public_path}/stylesheets-compiled")
   end  
-
-  it 'cleans '
 
   describe 'Custom compiler settings' do
     let(:app) { rack_app }
@@ -125,6 +124,11 @@ describe Padrino::Pipeline::Compiler::Sprockets do
         digest = @app.assets['application.css'].digest
         assert_match_in_file '.home', "#{@public_path}/stylesheets/application-#{digest}.css"
         assert_match_in_file '.div', "#{@public_path}/stylesheets/application-#{digest}.css"
+      end
+
+      it 'finds the example bootstrap gems assets' do
+        get '/assets/stylesheets/boot.css'
+        assert_match "normalize\.css", last_response.body
       end
     end
   end
