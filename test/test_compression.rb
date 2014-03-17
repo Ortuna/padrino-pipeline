@@ -15,10 +15,13 @@ def unsilence_warnings
 end
 
 def in_env(env)
+  silence_warnings
+  reset_consts
   %w(PADRINO_ENV RAKE_ENV).each do |const|
     Object.const_set(const, env)
     yield
   end
+  unsilence_warnings
 end
 
 
@@ -36,12 +39,7 @@ shared_examples_for :pipeline do
           config.js_assets  = "#{assets_location}/javascripts"
         end
       end
-
-      silence_warnings
-      reset_consts
     end
-
-    after { unsilence_warnings }
 
     it 'should not compress css in development mode' do
       in_env "development" do
@@ -64,11 +62,7 @@ describe :default_compression do
   before do
     class SomeApp < Padrino::Application; end
     @config = Padrino::Pipeline::Configuration.new(SomeApp)
-    silence_warnings
-    reset_consts
   end
-
- after { unsilence_warnings }
 
   it 'serve_compressed? is false for test' do
     in_env "test" do
