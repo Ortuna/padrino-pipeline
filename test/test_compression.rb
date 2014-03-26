@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/helpers/helper')
 def reset_consts
   Object.send(:remove_const, :PADRINO_ENV) if defined? PADRINO_ENV
   Object.send(:remove_const, :RACK_ENV) if defined? RACK_ENV
+  Object.send(:remove_const, :RAKE_ENV) if defined? RAKE_ENV
 end
 
 def silence_warnings
@@ -17,7 +18,7 @@ end
 def in_env(env)
   silence_warnings
   reset_consts
-  %w(PADRINO_ENV RAKE_ENV).each do |const|
+  %w(PADRINO_ENV RACK_ENV RAKE_ENV).each do |const|
     Object.const_set(const, env)
     yield
   end
