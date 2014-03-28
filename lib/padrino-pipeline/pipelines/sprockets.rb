@@ -11,8 +11,17 @@ module Padrino
       end
 
       private
+
+      REQUIRED_LIBRARIES = %w[sprockets uglifier]
+
       def require_libraries
-        %w[sprockets uglifier].each { |package| require package }
+        REQUIRED_LIBRARIES.each { |package| require package }
+      rescue LoadError
+        message = REQUIRED_LIBRARIES.inject("Please, add these to your app Gemfile:\n") do |all, package|
+          all << "gem '#{package}'\n"
+        end
+        defined?(logger) ? logger.error(message) : warn(message)
+        raise
       end
 
       def paths

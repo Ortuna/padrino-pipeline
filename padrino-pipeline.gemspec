@@ -23,12 +23,21 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rdoc_options  = ["--charset=UTF-8"]
 
+
   s.add_dependency("padrino-core", ">= 0.11")
   s.add_dependency("padrino-helpers", ">= 0.11")
-  s.add_dependency("coffee-script", "~> 2.2")
-  s.add_dependency("sass", "~> 3.0")
-  s.add_dependency("uglifier", "~> 2.1")
+
+  s.add_development_dependency("nokogiri", RUBY_VERSION < "1.9" ? "~> 1.5.10" : "~> 1.6")
+
+  s.add_development_dependency("rake")
+  s.add_development_dependency("rack-test", ">= 0.5.0")
+  s.add_development_dependency("minitest")
+  s.add_development_dependency("bootstrap-sass", "~> 3.1")
+
+  s.add_development_dependency("coffee-script", "~> 2.2")
+  s.add_development_dependency("sass", "~> 3.0")
+  s.add_development_dependency("uglifier", "~> 2.1")
   
-  s.add_dependency("sprockets", "~> 2.11")
-  s.add_dependency("sinatra-assetpack", "~> 0.3")
+  s.add_development_dependency("sprockets", "~> 2.11")
+  s.add_development_dependency("sinatra-assetpack", "~> 0.3")
 end
