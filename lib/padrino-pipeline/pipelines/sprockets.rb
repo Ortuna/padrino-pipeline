@@ -1,15 +1,8 @@
+require 'padrino-pipeline/pipelines/base'
+
 module Padrino
   module Pipeline 
-    class Sprockets
-
-      def initialize(app, config)
-        require_libraries
-        @app       = app
-        @config    = config
-        setup_enviroment
-        setup_sprockets
-      end
-
+    class Sprockets < Base
       private
 
       REQUIRED_LIBRARIES = %w[sprockets uglifier]
@@ -31,7 +24,7 @@ module Padrino
         js_assets + css_assets + image_assets
       end
 
-      def setup_sprockets
+      def setup_pipeline
         paths.each { |path| @app.settings.assets.append_path path }
         mount_js_assets    @config.js_prefix 
         mount_css_assets   @config.css_prefix

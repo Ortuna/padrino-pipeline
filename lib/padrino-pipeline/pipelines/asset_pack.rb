@@ -1,15 +1,8 @@
+require 'padrino-pipeline/pipelines/base'
+
 module Padrino
   module Pipeline
-    class AssetPack
-
-      def initialize(app, config)
-        require_libraries
-        @app    = app
-        @config = config
-        setup_enviroment
-        setup_pipeline
-      end
-
+    class AssetPack < Base
       def packages
         @config.packages  || []
       end
@@ -53,7 +46,6 @@ module Padrino
           end
         end 
       end
-
     end
   end
 end
