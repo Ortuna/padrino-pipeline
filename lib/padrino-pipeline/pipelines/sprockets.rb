@@ -3,19 +3,9 @@ require 'padrino-pipeline/pipelines/base'
 module Padrino
   module Pipeline 
     class Sprockets < Base
-      private
-
       REQUIRED_LIBRARIES = %w[sprockets uglifier]
 
-      def require_libraries
-        REQUIRED_LIBRARIES.each { |package| require package }
-      rescue LoadError
-        message = REQUIRED_LIBRARIES.inject("Please, add these to your app Gemfile:\n") do |all, package|
-          all << "gem '#{package}'\n"
-        end
-        defined?(logger) ? logger.error(message) : warn(message)
-        raise
-      end
+      private
 
       def paths
         js_assets    = @config.js_assets.kind_of?(Array)    ? @config.js_assets    : [@config.js_assets]

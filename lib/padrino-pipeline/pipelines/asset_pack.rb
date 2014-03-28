@@ -3,19 +3,13 @@ require 'padrino-pipeline/pipelines/base'
 module Padrino
   module Pipeline
     class AssetPack < Base
+      REQUIRED_LIBRARIES = { 'sinatra-assetpack' => ['sinatra/assetpack'] }
+
       def packages
         @config.packages  || []
       end
 
       private
-
-      def require_libraries
-        require 'sinatra/assetpack'
-      rescue LoadError
-        message = 'Please, add `gem "sinatra-assetpack", "~> 0.3"` to your app Gemfile'
-        defined?(logger) ? logger.error(message) : warn(message)
-        raise
-      end
 
       def setup_enviroment
         @app.set :serve_assets, true
