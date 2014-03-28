@@ -53,7 +53,9 @@ module Padrino
       end
 
       def serve_compressed?
-        env = (defined?(PADRINO_ENV) && PADRINO_ENV) || (defined?(RAKE_ENV) && RAKE_ENV)
+        env = (defined?(PADRINO_ENV) && PADRINO_ENV) || \
+          (defined?(RACK_ENV) && RACK_ENV) || \
+          (defined?(RAKE_ENV) && RAKE_ENV)
         enable_compression || env == "production"
       end
       
