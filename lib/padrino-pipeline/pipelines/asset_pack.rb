@@ -11,6 +11,11 @@ module Padrino
 
       private
 
+      def require_libraries
+        super
+        require 'padrino-pipeline/ext/asset-pack/helpers'
+      end
+
       def setup_enviroment
         @app.set :serve_assets, true
         @app.register Sinatra::AssetPack
