@@ -84,12 +84,12 @@ describe :default_compression do
   end
 end
   
-describe Padrino::Pipeline::Sprockets do
+describe 'Padrino::Pipeline::Sprockets' do
   before { @pipeline = Padrino::Pipeline::Sprockets }
   it_behaves_like :pipeline
 end
 
-describe Padrino::Pipeline::AssetPack do
+describe 'Padrino::Pipeline::AssetPack' do
   before { @pipeline = Padrino::Pipeline::AssetPack }
   it_behaves_like :pipeline 
 end
