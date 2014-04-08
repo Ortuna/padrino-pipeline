@@ -17,6 +17,7 @@ module Padrino
         @config = config
         setup_enviroment
         setup_pipeline
+        require 'padrino-pipeline/ext/padrino-helpers/asset_tag_helper'
       end
 
       private

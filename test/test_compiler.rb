@@ -15,4 +15,32 @@ describe :configuration do
     # assert_equal nil, config.send(:match_compiler)
   end
 
+  describe 'feature resolver' do
+    before do
+      class ConfigApp < Padrino::Application
+        register Padrino::Pipeline
+      end
+      @test_app = ConfigApp.dup
+    end
+
+    it 'requires proper scripts' do
+      @test_app.class_eval do
+        configure_assets do |config|
+          config.pipeline = :sprockets
+        end
+      end
+      assert_equal 'Padrino::Pipeline::Sprockets', @test_app.pipeline.pipeline.class.to_s
+    end
+
+    it 'raises error when the pipeline is not found' do
+      e = assert_raises(RuntimeError) do
+        @test_app.class_eval do
+          configure_assets do |config|
+            config.pipeline = :shady
+          end
+        end
+      end
+      assert_equal 'shady pipeline is not registered', e.message
+    end
+  end
 end

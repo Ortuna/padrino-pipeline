@@ -22,7 +22,7 @@ module Padrino
         options = sources.extract_options!.symbolize_keys
         options.reverse_merge!(:type => 'text/javascript')
         sources.flatten.map { |source|
-          content_tag(:script, nil, options.reverse_merge(:src => resolve_js_path(source)))
+          content_tag(:script, nil, options.reverse_merge(:src => resolve_js_path(source.to_s)))
         }.join("\n").html_safe
       end
 
@@ -31,7 +31,7 @@ module Padrino
         options = sources.extract_options!.symbolize_keys
         options.reverse_merge!(:media => 'screen', :rel => 'stylesheet', :type => 'text/css')
         sources.flatten.map { |source|
-          tag(:link, options.reverse_merge(:href => asset_path(:css, resolve_css_path(source))))
+          tag(:link, options.reverse_merge(:href => asset_path(:css, resolve_css_path(source.to_s))))
         }.join("\n").html_safe
       end
 
