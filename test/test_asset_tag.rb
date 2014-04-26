@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/helpers/helper')
 shared_examples_for :pipeline do
   describe :asset_tags do
 
-    context 'asset tags for #js #css #image #font' do
+    context 'asset tags for #js #css #image' do
       let(:app) { rack_app }
       before :each do
         assets_location = "#{fixture_path('sprockets_app')}/assets/javascripts"
