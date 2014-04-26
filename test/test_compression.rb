@@ -57,32 +57,33 @@ shared_examples_for :pipeline do
     end
 
   end
+
+  describe :default_compression do
+    before do
+      @config = Padrino::Pipeline::Configuration.new(mock_app)
+    end
+
+    it 'serve_compressed? is false for test' do
+      in_env "test" do
+        refute @config.serve_compressed? 
+      end
+    end
+
+    it 'serve_compressed? is false for development' do
+      in_env "development" do
+        refute @config.serve_compressed? 
+      end
+    end
+
+    it 'serve_compressed? is true for production' do
+      in_env "production" do
+        assert @config.serve_compressed? 
+      end
+    end
+  end
+
 end
 
-describe :default_compression do
-  before do
-    class SomeApp < Padrino::Application; end
-    @config = Padrino::Pipeline::Configuration.new(SomeApp)
-  end
-
-  it 'serve_compressed? is false for test' do
-    in_env "test" do
-      refute @config.serve_compressed? 
-    end
-  end
-
-  it 'serve_compressed? is false for development' do
-    in_env "development" do
-      refute @config.serve_compressed? 
-    end
-  end
-
-  it 'serve_compressed? is true for production' do
-    in_env "production" do
-      assert @config.serve_compressed? 
-    end
-  end
-end
   
 describe 'Padrino::Pipeline::Sprockets' do
   before { @pipeline = Padrino::Pipeline::Sprockets }
