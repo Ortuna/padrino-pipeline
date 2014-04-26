@@ -10,6 +10,7 @@ module Padrino
         when :css    then pipeline.css_prefix
         when :js     then pipeline.js_prefix
         when :images then pipeline.image_prefix
+        when :fonts  then pipeline.font_prefix
         else kind.to_s
         end
       end
