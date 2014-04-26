@@ -3,8 +3,8 @@ module Padrino
     class Configuration
 
       attr_accessor :pipeline,   :packages,  :prefix 
-      attr_accessor :css_prefix, :js_prefix, :image_prefix 
-      attr_accessor :css_assets, :js_assets, :image_assets
+      attr_accessor :css_prefix, :js_prefix, :image_prefix, :font_prefix 
+      attr_accessor :css_assets, :js_assets, :image_assets, :font_assets
       attr_accessor :js_compiled_output, :css_compiled_output, :compiled_output
       attr_accessor :js_compiled_asset,  :css_compiled_asset
       attr_accessor :enable_compression, :app
@@ -15,10 +15,12 @@ module Padrino
         @image_prefix = '/assets/images'
         @js_prefix    = '/assets/javascripts'
         @css_prefix   = '/assets/stylesheets'
+        @font_prefix  = '/assets/fonts'
 
         @image_assets = "#{app_root}/assets/images"
         @js_assets    = "#{app_root}/assets/javascripts"
         @css_assets   = "#{app_root}/assets/stylesheets"
+        @font_assets  = "#{app_root}/assets/fonts"
 
         @compiled_output     = "#{app_root}/public"
         @js_compiled_output  = "javascripts"
@@ -50,6 +52,10 @@ module Padrino
 
       def css_prefix
         "#{prefix || ''}#{@css_prefix}"
+      end
+      
+      def font_prefix
+        "#{prefix || ''}#{@font_prefix}"
       end
 
       def serve_compressed?

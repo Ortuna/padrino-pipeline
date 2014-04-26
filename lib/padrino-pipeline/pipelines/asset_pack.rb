@@ -22,8 +22,8 @@ module Padrino
       end
 
       def setup_pipeline
-        js_prefix, css_prefix, image_prefix = @config.js_prefix, @config.css_prefix, @config.image_prefix
-        js_assets, css_assets, image_assets = @config.js_assets, @config.css_assets, @config.image_assets
+        js_prefix, css_prefix, image_prefix, font_prefix = @config.js_prefix, @config.css_prefix, @config.image_prefix, @config.font_prefix
+        js_assets, css_assets, image_assets, font_assets = @config.js_assets, @config.css_assets, @config.image_assets, @config.font_assets
         packages            = self.packages
         compression_enabled = @config.serve_compressed?
 
@@ -37,6 +37,7 @@ module Padrino
           mount_asset(js_prefix,    js_assets)
           mount_asset(css_prefix,   css_assets)
           mount_asset(image_prefix, image_assets)
+          mount_asset(font_prefix,  font_assets)
 
           packages.each { |package| send(package.shift, *package) }
           if compression_enabled

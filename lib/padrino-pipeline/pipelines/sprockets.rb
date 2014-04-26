@@ -11,7 +11,8 @@ module Padrino
         js_assets    = @config.js_assets.kind_of?(Array)    ? @config.js_assets    : [@config.js_assets]
         css_assets   = @config.css_assets.kind_of?(Array)   ? @config.css_assets   : [@config.css_assets]
         image_assets = @config.image_assets.kind_of?(Array) ? @config.image_assets : [@config.image_assets]
-        js_assets + css_assets + image_assets
+        font_assets  = @config.font_assets.kind_of?(Array)  ? @config.font_assets  : [@config.font_assets]
+        js_assets + css_assets + image_assets + font_assets
       end
 
       def setup_pipeline
@@ -19,6 +20,7 @@ module Padrino
         mount_js_assets    @config.js_prefix 
         mount_css_assets   @config.css_prefix
         mount_image_assets @config.image_prefix
+        mount_font_assets  @config.font_prefix
       end
 
       def setup_enviroment
@@ -49,6 +51,10 @@ module Padrino
         mount_assets(:prefix => prefix,
                      :extension => "css",
                      :content_type => "text/css")
+      end
+      
+      def mount_font_assets(prefix)
+        mount_assets(:prefix => prefix)
       end
 
       def mount_assets(options = {})
