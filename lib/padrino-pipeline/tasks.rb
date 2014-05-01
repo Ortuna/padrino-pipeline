@@ -1,4 +1,5 @@
 begin
+  require 'padrino'
   require 'padrino-core/tasks'
   ##
   # Allows tasks to be added to the client Padrino application
